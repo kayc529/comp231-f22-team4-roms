@@ -23,13 +23,15 @@ const ExampleHomePage = () => {
 
   //if the bracket is empty, the function will be triggered when the component is FIRST loaded
   useEffect(() => {
-    alert('First time in the Home page');
+    alert('Welcome!');
   }, []);
 
   //if the variables inside the bracket changed, the function will be triggered
   useEffect(() => {
     if (isSwitchOn) {
-      alert('The switch is on');
+      console.log('The switch is on');
+    } else {
+      console.log('The switch is off');
     }
   }, [isSwitchOn]);
 
@@ -52,8 +54,10 @@ const ExampleHomePage = () => {
   };
 
   return (
+    //please avoid inline styling. This is for quick demo purpose only
     <Stack gap={3} style={{ width: '500px' }}>
       <h2>Example Home Page</h2>
+
       {/*useState example */}
       <Form>
         <Form.Group className='mb-3'>
@@ -66,16 +70,25 @@ const ExampleHomePage = () => {
           />
         </Form.Group>
       </Form>
+      {/*To use a state inside a paragraph */}
       <p>You are searching for universities in this country: {countryName}</p>
+
+      {/*Dispatch action and useEffect example */}
       <ExampleBox onClick={onBoxClicked} />
+      <p>click the box above to see useEffect in action</p>
+
       {/*Call API and useSelector example */}
-      <button onClick={callAPI}>Search for universities</button>
+      <button onClick={callAPI}>
+        Search for universities in this country(Call API)
+      </button>
+
       {/* this is the way to loop through the list and create a list of items*/}
       {exampleList?.map((item, index) => {
         //remember to add a key to each component to avoid warning
         return <ExampleComponent key={index} somePropName={item} />;
       })}
 
+      {/*show spinner only when the isLoading state is true */}
       {isLoading && <Spinner animation='border' size='lg' />}
     </Stack>
   );
