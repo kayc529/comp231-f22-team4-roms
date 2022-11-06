@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+## Starting the project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+After you clone the project to your computer, ensure all packages are installed before you start the project.
 
-## Available Scripts
+server: `npm install`
 
-In the project directory, you can run:
+Start the server `npm start`
 
-### `npm start`
+## Basic Git Commands (aka Git101)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The **main** branch consists of production codes, which means *it should only contain codes that 100% work*. Please ensure your codes are well tested before merging codes into the **main** branch.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You should also run `npm install` after you switch branches.
 
-### `npm test`
+### Naming a branch
+It is important to name a branch *properly* so that you and other developers know what the purpose of having that branch is.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Good naming examples:
+- features/edit-menu-page
+- bugfix/incorrect-order-details
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Create a new branch *locally*
+`git branch <new-branch-name>`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Switching to another branch
+`git checkout <branch-name>`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+*You cannot switch branch unless all the modifications are committed. If you want to force switch branch, use `git checkout <branch-name> -f`*
 
-### `npm run eject`
+### Check which branch you are currently in and see the list of existing branches
+`git branch`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Pulling and merging codes from remote main into local branch
+Before pushing your codes, make sure your branch contains the most updated codes from the **main** branch (since someone may have merged their codes into the main branch while you are working on your own branch).
+1. Make sure all the changes in your working branch is commited
+2. Switch to your local main branch `git checkout main`
+3. Pull the latest codes from the remote **main** branch `git pull` 
+4. Switch back to your branch `git checkout <branch-name>`
+5. Merge the codes from your local main branch into your branch `git merge main`
+6. Resolve any conflicts
+7. Commit again (if neccessary)
+7. Push your codes to your remote branch `git push -u origin <branch-name>`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Pushing codes to Github (remote)
+1. Add all modifications to stage `git add .`
+2. Commit with message `git commit -m '<your message>'`
+3. Push codes to repo `git push origin -u <branch-name>`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+*Please note that you MUST NOT push codes to the **main** branch. Pull request must be created if you want to merge your branch into the **main** branch*
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Pull Request
+### Creating Pull Request
+Before merging your codes into the **main** branch, you must create a pull request to let other team members look at your codes.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+It is the best to mention what changes are made in your codes when you create a pull request.
