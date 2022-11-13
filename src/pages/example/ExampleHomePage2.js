@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Form, Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUniversityList } from '../../features/example/exampleSlice';
 import ExampleComponent from '../../components/ExampleComponent';
-import Spinner from 'react-bootstrap/Spinner';
 import ExampleBox from '../../components/ExampleBox';
 import { toggleSwitch } from '../../features/example/exampleSlice';
 
@@ -54,43 +52,46 @@ const ExampleHomePage = () => {
   };
 
   return (
-    //please avoid inline styling. This is for quick demo purpose only
-    <Stack gap={3} style={{ width: '500px' }}>
-      <h2>Example Home Page</h2>
+    <>
+      <div className='container pt-5'>
+        <h2>Example Home Page 2</h2>
 
-      {/*useState example */}
-      <Form>
-        <Form.Group className='mb-3'>
-          <Form.Label>Country: </Form.Label>
-          <Form.Control
-            placeholder='enter a country'
-            value={countryName}
-            onChange={onCountryChanged} //this is called referencing a function
-            //or you can lambda function i.e.  onChange={(e) => onCountryChanged(e)}
-          />
-        </Form.Group>
-      </Form>
-      {/*To use a state inside a paragraph */}
-      <p>You are searching for universities in this country: {countryName}</p>
+        <div className='row'>
+          <div className='col-6'>
+            {/*useState example */}
+            <form>
+              <div class="mb-3">
+                <label for="inputCountry" class="form-label">Country</label>
+                <input id="inputCountry" value={countryName} onChange={onCountryChanged} placeholder="enter a country"  type="text" class="form-control"/>
+              </div>
+            </form>
+            
+            {/*To use a state inside a paragraph */}
+            <p>You are searching for universities in this country: {countryName}</p>
+            
+            {/*Call API and useSelector example */}
+            <button className="btn btn-outline-dark" onClick={callAPI}>
+              Search for universities in this country(Call API)
+            </button>
 
-      {/*Dispatch action and useEffect example */}
-      <ExampleBox onClick={onBoxClicked} />
-      <p>click the box above to see useEffect in action</p>
+            {/* this is the way to loop through the list and create a list of items*/}
+            {exampleList?.map((item, index) => {
+              //remember to add a key to each component to avoid warning
+              return <ExampleComponent key={index} somePropName={item} />;
+            })}
 
-      {/*Call API and useSelector example */}
-      <button onClick={callAPI}>
-        Search for universities in this country(Call API)
-      </button>
+            {/*show spinner only when the isLoading state is true */}
+            {isLoading && <div class="spinner-border text-primary"></div>}
+          </div>
 
-      {/* this is the way to loop through the list and create a list of items*/}
-      {exampleList?.map((item, index) => {
-        //remember to add a key to each component to avoid warning
-        return <ExampleComponent key={index} somePropName={item} />;
-      })}
-
-      {/*show spinner only when the isLoading state is true */}
-      {isLoading && <Spinner animation='border' size='lg' />}
-    </Stack>
+          <div className='col-6'>
+            {/*Dispatch action and useEffect example */}
+            <ExampleBox onClick={onBoxClicked} />
+            <p>click the box above to see useEffect in action</p>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
