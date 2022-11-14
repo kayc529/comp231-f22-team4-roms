@@ -6,9 +6,13 @@ const ExampleComponent = ({ somePropName }) => {
   const { name, web_pages } = somePropName;
 
   return (
-    <div>
-      <h4>{name}</h4>
-      <a href={web_pages[0]}>Link</a>
+    <div class="row justify-content-between mt-2">
+      <div class="col">
+        {name}
+      </div>
+      <div class="col-2 text-center">
+        <a href={web_pages[0]} target="_blank" rel="noopener noreferrer">Link</a>
+      </div>
     </div>
   );
 };
