@@ -1,8 +1,12 @@
+import React, { useState } from 'react';
 import { Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { ADD_TO_CART } from '../features/cart/cartConstants';
 import { addToCart, deleteFromCart } from '../features/cart/cartActions';
+import DatePicker from "react-datepicker";
+import {setMinutes, setHours} from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Cart = () => {
     let navigate = useNavigate();
@@ -59,7 +63,9 @@ const Cart = () => {
     
     const handleHome = evt => {
         navigate('/');
-	};
+    };
+    
+    const [now, setStartDate] = useState(new Date());
 
   return (
     //please avoid inline styling. This is for quick demo purpose only
@@ -155,6 +161,22 @@ const Cart = () => {
                 <div className="row p-3">
                     <div className="col">
                         Select time
+                    </div>
+                  </div>
+                  <div className="row p-3">
+                      <div className="col">
+                          <DatePicker
+                                className='form-control'
+                                selected={now}
+                                minTime={setMinutes(now, 30)} 
+                                maxTime={setHours(setMinutes(now, 30), 22)} 
+                                onChange={(date) => setStartDate(date)}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={30}
+                                timeCaption="Time"
+                                dateFormat="h:mm aa"
+                            />
                     </div>
                 </div>
             </div>
