@@ -33,9 +33,7 @@ const Cart = () => {
 
 		dispatch({
 			type: ADD_TO_CART,
-			payload:  {
-                cart
-            },
+			payload:  cart,
 		});
     };
 
@@ -68,7 +66,6 @@ const Cart = () => {
     const [now, setStartDate] = useState(new Date());
 
   return (
-    //please avoid inline styling. This is for quick demo purpose only
     <Stack gap={3}>
       <section className='cartPage'>
             <div id="cartList" className="container-fluid">
@@ -111,7 +108,7 @@ const Cart = () => {
                                 <div className="col-3">
                                     <input className="form-control" type='number' min='1'
                                         value={item.count}
-                                        onInput={e =>
+                                        onChange={e =>
                                             changeQuantity(
                                                 e, item
                                             )
