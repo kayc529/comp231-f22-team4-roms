@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*Cart Page*/
+.cartItem {
+  display: grid;
+  row-gap: 0.5rem;
+  padding: 15px 30px;
+}
+
+.cartItem .img-thumbnail{
+  max-width: 100px;
+}
