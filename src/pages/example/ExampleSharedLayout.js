@@ -24,6 +24,9 @@ const ExampleSharedLayout = () => {
                 <li className="nav-item">
                   <a className="nav-link" href="/abc">Error</a>
                 </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/signin">Sign In</a>
+                </li>
                 <li className="nav-item dropdown">
                   <div className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                     Dropdown link

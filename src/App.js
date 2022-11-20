@@ -4,6 +4,8 @@ import ExampleHomePage2 from './pages/example/ExampleHomePage2';
 import ExampleSharedLayout from './pages/example/ExampleSharedLayout';
 import ExampleAnotherPage from './pages/example/ExampleAnotherPage';
 import ExampleNotFoundPage from './pages/example/ExampleNotFoundPage';
+import SignInPage from './pages/example/SignInPage';
+import SignUpPage from './pages/example/SignUpPage';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
             <Route index element={<ExampleHomePage />} />
             <Route path='/home2' element={<ExampleHomePage2 />} />
             <Route path='another' element={<ExampleAnotherPage />} />
+            <Route path='signin' element={<SignInPage />} />
+            <Route path='signup' element={<SignUpPage />} />
             {/* add page here if you want the shared layout*/}
           </Route>
           {/* add page here if you don't want the shared layout*/}
