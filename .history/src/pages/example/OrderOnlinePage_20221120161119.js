@@ -27,30 +27,6 @@ const OrderOnlinePage = () => {
         let z = x - y;
         document.getElementById('b').value = z;
     }
-    function add3() {
-        let x = +document.getElementById('c').value
-        let y = 1;
-        let z = x + y;
-        document.getElementById('c').value = z;
-    }
-    function subtract3() {
-        let x = +document.getElementById('c').value
-        let y = 1;
-        let z = x - y;
-        document.getElementById('c').value = z;
-    }
-    function add4() {
-        let x = +document.getElementById('d').value
-        let y = 1;
-        let z = x + y;
-        document.getElementById('d').value = z;
-    }
-    function subtract4() {
-        let x = +document.getElementById('d').value
-        let y = 1;
-        let z = x - y;
-        document.getElementById('d').value = z;
-    }
 
     return (
       <div className="container">
@@ -94,9 +70,9 @@ const OrderOnlinePage = () => {
                         <input onKeyPress={(event) => {
                             if (!/[0-9]/.test(event.key)) {
                                 event.preventDefault();
-                            }}} id='c'
+                            }}}
                         />
-                        &nbsp;&nbsp;<button onClick={() =>add3()} style={{border:'none', borderRadius:'12px', backgroundColor:'#04AA6D', color:'white', margin:'4px 2px', height:'35px', width:'50px'}}> Add </button><button onClick={() =>subtract3()} style={{border:'none', borderRadius:'12px', backgroundColor:'red', color:'white', margin:'4px 2px', height:'35px', width:'90px'}}> Remove </button>
+                        &nbsp;&nbsp;<button onClick="" style={{border:'none', borderRadius:'12px', backgroundColor:'#04AA6D', color:'white', margin:'4px 2px', height:'35px', width:'50px'}}> Add </button><button onClick="" style={{border:'none', borderRadius:'12px', backgroundColor:'red', color:'white', margin:'4px 2px', height:'35px', width:'90px'}}> Remove </button>
                     </td>
                     <td align="center">
                         <img src={require('./sausage.jpg')} alt="sausage" height="300" width="450" />
@@ -105,9 +81,9 @@ const OrderOnlinePage = () => {
                         <input onKeyPress={(event) => {
                             if (!/[0-9]/.test(event.key)) {
                                 event.preventDefault();
-                            }}} id='d'
+                            }}}
                         />
-                        &nbsp;&nbsp;<button onClick={() =>add4()} style={{border:'none', borderRadius:'12px', backgroundColor:'#04AA6D', color:'white', margin:'4px 2px', height:'35px', width:'50px'}}> Add </button><button onClick={() =>subtract4()} style={{border:'none', borderRadius:'12px', backgroundColor:'red', color:'white', margin:'4px 2px', height:'35px', width:'90px'}}> Remove </button>
+                        &nbsp;&nbsp;<button onClick="" style={{border:'none', borderRadius:'12px', backgroundColor:'#04AA6D', color:'white', margin:'4px 2px', height:'35px', width:'50px'}}> Add </button><button onClick="" style={{border:'none', borderRadius:'12px', backgroundColor:'red', color:'white', margin:'4px 2px', height:'35px', width:'90px'}}> Remove </button>
                     </td>
                 </tr>
                 <tr>&nbsp;</tr>
