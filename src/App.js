@@ -5,7 +5,10 @@ import SignInPage from './pages/example/SignInPage';
 import SignUpPage from './pages/example/SignUpPage';
 import Menu from './components/Menu';
 import CartPage from './pages/Cart';
-
+import MenuItemListPage from './pages/MenuItemListPage';
+import AddMenuItemPage from './pages/AddMenuItemPage';
+import EditMenuItemPage from './pages/EditMenuItemPage';
+import UploadMenuItemImagePage from './pages/UploadMenuItemImagePage';
 
 function App() {
   return (
@@ -20,6 +23,13 @@ function App() {
             <Route path='signin' element={<SignInPage />} />
             <Route path='signup' element={<SignUpPage />} />
             <Route path='cart' element={<CartPage />} />
+            <Route path='menu-items' element={<MenuItemListPage />} />
+            <Route path='add-menu-item' element={<AddMenuItemPage />} />
+            <Route path='edit-menu-item/:id' element={<EditMenuItemPage />} />
+            <Route
+              path='upload-image/:id'
+              element={<UploadMenuItemImagePage />}
+            />
 
             {/* add page here if you want the shared layout*/}
           </Route>
