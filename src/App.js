@@ -1,8 +1,8 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import ExampleHomePage from './pages/example/ExampleHomePage';
 import ExampleNotFoundPage from './pages/example/ExampleNotFoundPage';
-import SignInPage from './pages/example/SignInPage';
-import SignUpPage from './pages/example/SignUpPage';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
 import Menu from './components/Menu';
 import CartPage from './pages/Cart';
 import MenuItemListPage from './pages/MenuItemListPage';
