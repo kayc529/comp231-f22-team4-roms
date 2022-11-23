@@ -43,14 +43,47 @@ const MenuItemListPage = () => {
   }
 
   return (
-    <div>
-      {menuItemList.map((item, index) => {
-        return (
-          <p key={item._id} onClick={() => onMenuItemSelected(item._id)}>
-            {item.name}
-          </p>
-        );
-      })}
+    <div className='container'>
+      <h1 className='text-center'>Menu Items</h1>
+      <div className='d-flex pb-4'>
+        <button onClick={onAddMenuItem} className='btn btn-primary ms-auto'>Add Item</button>
+      </div>
+      <div className='table-responsive'>
+        <table className='table table-hover'>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th className='text-end'>Price</th>
+              <th className='text-center' width="100">Status</th>
+              <th className='text-end' width="200">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          {menuItemList.map((item, index) => {
+            return (
+              <tr key={item._id}>
+                <td></td>
+                <td>{item.name}</td>
+                <td></td>
+                <td className='text-end'>$ {item.price}</td>
+                <td className='text-center'>
+                  { item.isAvailable 
+                    ? <span className="badge rounded-pill bg-success">Active</span>
+                    : <span className="badge rounded-pill bg-danger">Inactive</span>
+                  }
+                </td>
+                <td className='text-end'>
+                  <button onClick={() => onMenuItemDeleted(item._id)} className='btn btn-outline-danger me-3'>Delete</button>
+                  <button onClick={() => onMenuItemSelected(item._id)} className='btn btn-outline-primary'>Edit</button>
+                </td>
+              </tr>
+            );
+          })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
