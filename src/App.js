@@ -1,5 +1,5 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import ExampleHomePage from './pages/example/ExampleHomePage';
+//import ExampleHomePage from './pages/example/ExampleHomePage';
 import ExampleNotFoundPage from './pages/example/ExampleNotFoundPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
@@ -10,13 +10,15 @@ import AddMenuItemPage from './pages/AddMenuItemPage';
 import EditMenuItemPage from './pages/EditMenuItemPage';
 import UploadMenuItemImagePage from './pages/UploadMenuItemImagePage';
 
+import HomePage from './pages/HomePage';
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Menu />}>
-            <Route index element={<ExampleHomePage />} />
+            <Route index element={<HomePage />} />
 
             {/*<Route path='/home2' element={<ExampleHomePage2 />} />*/}
             {/*<Route path='another' element={<ExampleAnotherPage />} />*/}
