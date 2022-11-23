@@ -9,25 +9,47 @@ const EditMenuItemPage = () => {
   const navigate = useNavigate();
 
   // handle form data
+  // const [formData, setFormData] = useState({
+  //   name: menuItem.name,
+  //   desc: menuItem.desc,
+  //   price: menuItem.price,
+  //   isAvailable: true,
+  // });
   const [formData, setFormData] = useState({
-    name: menuItem.name,
-    desc: menuItem.desc,
-    price: menuItem.price,
+    _id: '',
+    name: '',
+    desc: '',
+    price: '',
     isAvailable: true,
   });
 
-  console.log(formData);
+  useEffect(() => {
+    if (menuItem) {
+      setFormData({
+        _id: menuItem._id,
+        name: menuItem.name,
+        desc: menuItem.desc,
+        price: menuItem.price,
+        isAvailable: menuItem.isAvailable,
+      });
+    }
+  }, [menuItem]);
+
+  //console.log(formData);
 
   function handleInputChange(event) {
     const name = event.target.name;
-    let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    let value =
+      event.target.type === 'checkbox'
+        ? event.target.checked
+        : event.target.value;
 
-    setFormData(formData => {
-        return {
-            ...formData,
-            [name]: value
-        }
-    })
+    setFormData((formData) => {
+      return {
+        ...formData,
+        [name]: value,
+      };
+    });
   }
 
   useEffect(() => {
@@ -46,17 +68,16 @@ const EditMenuItemPage = () => {
   };
 
   const onSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     //copy the original menu item first, and then update the fields
-    const updatedMenuItem = formData;
     // const updatedMenuItem = {
     //   name: event.target.elements.name.value,
     //   desc: event.target.elements.desc.value,
     // };
-    await dispatch(editMenuItem(updatedMenuItem));
+    console.log(formData);
+    await dispatch(editMenuItem(formData));
     //can do something after submitted
     navigate('../menu-items');
-    console.log(updatedMenuItem);
   };
 
   if (isLoading) {
@@ -66,83 +87,150 @@ const EditMenuItemPage = () => {
 
   // Demo Data
   const FOODCATERGORY = [
-    {name: "CLASSIC BREAKFASTS"},
-    {name: "BENNYS"},
-    {name: "DELUXE BREAKFASTS"},
-    {name: "SIDES"}
-  ]
+    { name: 'CLASSIC BREAKFASTS' },
+    { name: 'BENNYS' },
+    { name: 'DELUXE BREAKFASTS' },
+    { name: 'SIDES' },
+  ];
 
-  const ORDERTYPE = [
-    {name: "Dinein"},
-    {name: "Takeaway"}
-  ]
+  const ORDERTYPE = [{ name: 'Dinein' }, { name: 'Takeaway' }];
 
   return (
     <div className='container'>
       <h1 className='text-center'>Edit Menu Item</h1>
       <div className='d-flex pb-4'>
-        <a href="/menu-items" className='btn btn-outline-dark ms-auto me-3'>cancel</a>
-        <button form="form-menu-item" className='btn btn-primary'>Save</button>
+        <a href='/menu-items' className='btn btn-outline-dark ms-auto me-3'>
+          cancel
+        </a>
+        <button form='form-menu-item' className='btn btn-primary'>
+          Save
+        </button>
       </div>
-      <form id="form-menu-item" onSubmit={onSubmit}>
-        <div className="mb-3 row">
-          <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
-          <div className="col-sm-10">
-            <input id="name" name="name" onChange={handleInputChange} defaultValue={formData.name} type="text" className="form-control"/>
+      <form id='form-menu-item' onSubmit={onSubmit}>
+        <div className='mb-3 row'>
+          <label htmlFor='name' className='col-sm-2 col-form-label'>
+            Name
+          </label>
+          <div className='col-sm-10'>
+            <input
+              id='name'
+              name='name'
+              onChange={handleInputChange}
+              value={formData.name}
+              type='text'
+              className='form-control'
+            />
           </div>
         </div>
-        <div className="mb-3 row">
-          <label htmlFor="desc" className="col-sm-2 col-form-label">Description</label>
-          <div className="col-sm-10">
-            <textarea id="desc" name="desc" onChange={handleInputChange} defaultValue={formData.desc} className="form-control" rows={5}></textarea>
+        <div className='mb-3 row'>
+          <label htmlFor='desc' className='col-sm-2 col-form-label'>
+            Description
+          </label>
+          <div className='col-sm-10'>
+            <textarea
+              id='desc'
+              name='desc'
+              onChange={handleInputChange}
+              defaultValue={formData.desc}
+              className='form-control'
+              rows={5}
+            ></textarea>
           </div>
         </div>
-        <div className="mb-3 row">
-          <label htmlFor="price" className="col-sm-2 col-form-label">Price</label>
-          <div className="col-sm-4">
-            <div className="input-group">
-              <span className="input-group-text" id="price">$</span>
-              <input id="price" name='price' onChange={handleInputChange} defaultValue={formData.price} type="text" className="form-control"/>
-            </div>
-          </div>
-        </div>
-        <div className="mb-3 row">
-          <label htmlFor="sortOrder" className="col-sm-2 col-form-label">Sort Order</label>
-          <div className="col-sm-4">
-            <input id="sortOrder" name='sortOrder' onChange={handleInputChange} type="number" className="form-control"/>
-          </div>
-        </div>
-        <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Status</label>
-          <div className="col-sm-10">
-            <div className="form-check form-switch">
-              <input name='isAvailable' type="checkbox" className="form-check-input"
+        <div className='mb-3 row'>
+          <label htmlFor='price' className='col-sm-2 col-form-label'>
+            Price
+          </label>
+          <div className='col-sm-4'>
+            <div className='input-group'>
+              <span className='input-group-text' id='price'>
+                $
+              </span>
+              <input
+                id='price'
+                name='price'
                 onChange={handleInputChange}
-                defaultChecked={menuItem.isAvailable} autoComplete="off"/>
+                defaultValue={formData.price}
+                type='text'
+                className='form-control'
+              />
             </div>
           </div>
         </div>
-        <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Category</label>
-          <div className="col-sm-4">
+        <div className='mb-3 row'>
+          <label htmlFor='sortOrder' className='col-sm-2 col-form-label'>
+            Sort Order
+          </label>
+          <div className='col-sm-4'>
+            <input
+              id='sortOrder'
+              name='sortOrder'
+              onChange={handleInputChange}
+              type='number'
+              className='form-control'
+            />
+          </div>
+        </div>
+        <div className='mb-3 row'>
+          <label className='col-sm-2 col-form-label'>Status</label>
+          <div className='col-sm-10'>
+            <div className='form-check form-switch'>
+              <input
+                name='isAvailable'
+                type='checkbox'
+                className='form-check-input'
+                onChange={handleInputChange}
+                defaultChecked={menuItem.isAvailable}
+                autoComplete='off'
+              />
+            </div>
+          </div>
+        </div>
+        <div className='mb-3 row'>
+          <label className='col-sm-2 col-form-label'>Category</label>
+          <div className='col-sm-4'>
             {FOODCATERGORY.map((item, index) => {
               return (
-                <div key={index} className="form-check">
-                  <input id={"category-"+index} defaultValue={"category-"+index} onChange={handleInputChange} name="category" className="form-check-input" type="checkbox" />
-                  <label htmlFor={"category-"+index} className="form-check-label">{item.name}</label>
+                <div key={index} className='form-check'>
+                  <input
+                    id={'category-' + index}
+                    defaultValue={'category-' + index}
+                    onChange={handleInputChange}
+                    name='category'
+                    className='form-check-input'
+                    type='checkbox'
+                  />
+                  <label
+                    htmlFor={'category-' + index}
+                    className='form-check-label'
+                  >
+                    {item.name}
+                  </label>
                 </div>
               );
             })}
           </div>
         </div>
-        <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Category</label>
-          <div className="col-sm-4">
+        <div className='mb-3 row'>
+          <label className='col-sm-2 col-form-label'>Category</label>
+          <div className='col-sm-4'>
             {ORDERTYPE.map((item, index) => {
               return (
-                <div key={index} className="form-check">
-                  <input id={"order-type-"+index} defaultValue={"category-"+index} onChange={handleInputChange} name="orderType" className="form-check-input" type="checkbox" />
-                  <label htmlFor={"order-type-"+index} className="form-check-label">{item.name}</label>
+                <div key={index} className='form-check'>
+                  <input
+                    id={'order-type-' + index}
+                    defaultValue={'category-' + index}
+                    onChange={handleInputChange}
+                    name='orderType'
+                    className='form-check-input'
+                    type='checkbox'
+                  />
+                  <label
+                    htmlFor={'order-type-' + index}
+                    className='form-check-label'
+                  >
+                    {item.name}
+                  </label>
                 </div>
               );
             })}
