@@ -13,9 +13,10 @@ const EditMenuItemPage = () => {
     name: menuItem.name,
     desc: menuItem.desc,
     price: menuItem.price,
-    sortOrder: 0,
-    isAvailable: menuItem.isAvailable,
+    isAvailable: true,
   });
+
+  console.log(formData);
 
   function handleInputChange(event) {
     const name = event.target.name;
@@ -44,16 +45,18 @@ const EditMenuItemPage = () => {
     dispatch(getMenuItem(menuItemId));
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (event) => {
+    event.preventDefault()
     //copy the original menu item first, and then update the fields
-    let updatedMenuItem = {...menuItem,
-       name:formData.name, 
-       desc:formData.desc, 
-       price:formData.price, 
-       isAvailable:formData.isAvailable};
+    const updatedMenuItem = formData;
+    // const updatedMenuItem = {
+    //   name: event.target.elements.name.value,
+    //   desc: event.target.elements.desc.value,
+    // };
     await dispatch(editMenuItem(updatedMenuItem));
     //can do something after submitted
     navigate('../menu-items');
+    console.log(updatedMenuItem);
   };
 
   if (isLoading) {
@@ -79,19 +82,19 @@ const EditMenuItemPage = () => {
       <h1 className='text-center'>Edit Menu Item</h1>
       <div className='d-flex pb-4'>
         <a href="/menu-items" className='btn btn-outline-dark ms-auto me-3'>cancel</a>
-        <button onClick={onSubmit} className='btn btn-primary'>Save</button>
+        <button form="form-menu-item" className='btn btn-primary'>Save</button>
       </div>
-      <form>
+      <form id="form-menu-item" onSubmit={onSubmit}>
         <div className="mb-3 row">
           <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
           <div className="col-sm-10">
-            <input id="name" name="name" onChange={handleInputChange} defaultValue={menuItem.name} type="text" className="form-control"/>
+            <input id="name" name="name" onChange={handleInputChange} defaultValue={formData.name} type="text" className="form-control"/>
           </div>
         </div>
         <div className="mb-3 row">
           <label htmlFor="desc" className="col-sm-2 col-form-label">Description</label>
           <div className="col-sm-10">
-            <textarea id="desc" name="desc" onChange={handleInputChange} className="form-control" rows={5}>{menuItem.desc}</textarea>
+            <textarea id="desc" name="desc" onChange={handleInputChange} defaultValue={formData.desc} className="form-control" rows={5}></textarea>
           </div>
         </div>
         <div className="mb-3 row">
@@ -99,14 +102,14 @@ const EditMenuItemPage = () => {
           <div className="col-sm-4">
             <div className="input-group">
               <span className="input-group-text" id="price">$</span>
-              <input id="price" name='price' onChange={handleInputChange} defaultValue={menuItem.price} type="text" className="form-control"/>
+              <input id="price" name='price' onChange={handleInputChange} defaultValue={formData.price} type="text" className="form-control"/>
             </div>
           </div>
         </div>
         <div className="mb-3 row">
           <label htmlFor="sortOrder" className="col-sm-2 col-form-label">Sort Order</label>
           <div className="col-sm-4">
-            <input id="sortOrder" name='sortOrder' onChange={handleInputChange} defaultValue={menuItem.sortOrder} type="number" className="form-control"/>
+            <input id="sortOrder" name='sortOrder' onChange={handleInputChange} type="number" className="form-control"/>
           </div>
         </div>
         <div className="mb-3 row">
@@ -125,7 +128,7 @@ const EditMenuItemPage = () => {
             {FOODCATERGORY.map((item, index) => {
               return (
                 <div key={index} className="form-check">
-                  <input id={"category-"+index} value={"category-"+index} onChange={handleInputChange} name="category" className="form-check-input" type="checkbox" />
+                  <input id={"category-"+index} defaultValue={"category-"+index} onChange={handleInputChange} name="category" className="form-check-input" type="checkbox" />
                   <label htmlFor={"category-"+index} className="form-check-label">{item.name}</label>
                 </div>
               );
@@ -138,7 +141,7 @@ const EditMenuItemPage = () => {
             {ORDERTYPE.map((item, index) => {
               return (
                 <div key={index} className="form-check">
-                  <input id={"order-type-"+index} value={"category-"+index} onChange={handleInputChange} name="orderType" className="form-check-input" type="checkbox" />
+                  <input id={"order-type-"+index} defaultValue={"category-"+index} onChange={handleInputChange} name="orderType" className="form-check-input" type="checkbox" />
                   <label htmlFor={"order-type-"+index} className="form-check-label">{item.name}</label>
                 </div>
               );

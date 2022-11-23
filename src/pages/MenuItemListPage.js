@@ -54,6 +54,7 @@ const MenuItemListPage = () => {
             <tr>
               <th>Image</th>
               <th>Name</th>
+              <th>Desc</th>
               <th>Category</th>
               <th className='text-end'>Price</th>
               <th className='text-center' width="100">Status</th>
@@ -66,6 +67,7 @@ const MenuItemListPage = () => {
               <tr key={item._id}>
                 <td></td>
                 <td>{item.name}</td>
+                <td>{item.desc}</td>
                 <td></td>
                 <td className='text-end'>$ {item.price}</td>
                 <td className='text-center'>
