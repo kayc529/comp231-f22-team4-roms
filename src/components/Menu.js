@@ -20,12 +20,13 @@ const Menu = () => {
                   <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Admin</a>
                   <ul className="dropdown-menu dropdown-menu-end">
                     <li><a className="dropdown-item" href="/signin">Sign In</a></li>
+                    <li><a className="dropdown-item" href="/signout">Sign Out</a></li>
                     <li><a className="dropdown-item" href="/signup">Sign Up</a></li>
                     <li><a className="dropdown-item" href="/menu-items">Menu Items</a></li>
                     <li><hr className="dropdown-divider"/></li>
                     <li><a className="dropdown-item" href="/">Order</a></li>
                     <li><a className="dropdown-item" href="/">Order History</a></li>
-                    <li><a className="dropdown-item" href="/">User</a></li>
+                    <li><a className="dropdown-item" href="/staffs">Staff</a></li>
                     <li><a className="dropdown-item" href="/">Setting</a></li>
                   </ul>
                 </li>

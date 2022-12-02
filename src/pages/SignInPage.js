@@ -9,7 +9,7 @@ const SignInPage = () => {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        document.title = "SignIn";
+        document.title = "Sign In";
     }, []);
 
     function onChangeUsername(event)
@@ -37,30 +37,33 @@ const SignInPage = () => {
     function handleSignIn(event)
     {
         event.preventDefault();
-
-        const UserData = {
+        
+        const staff = {
             username: username,
             password: password,
-            FirstName: '',
-            LastName: '',
-            EmailAddress: ''
         }
 
-        AuthService.login(UserData.username, UserData.password)
+        AuthService.login(staff.username, staff.password)
         .then((data) => {
-
+              console.log("login1")
             if(data.success)
             {
+              console.log("login2")
+
                 navigate("/order");
                 window.location.reload();
             }
             else
             {
+              console.log("login3")
+
                 setMessage(data.message);
                 clearForm(null);
             }
-            
-        }, error =>{
+
+        }, error => {
+              console.log("login4")
+          
             setMessage("Server Error!");
         });
     }

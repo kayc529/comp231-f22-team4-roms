@@ -5,10 +5,11 @@ class AuthService
     login(username, password)
     {
         return http.post('/auth/signin', {username, password})
-        .then(response => {
+            .then(response => {
+                
             if(response.data.token)
             {
-                localStorage.setItem("user", JSON.stringify(response.data));
+                localStorage.setItem("staff", JSON.stringify(response.data));
             }
             return response.data;
         })
@@ -29,10 +30,10 @@ class AuthService
 
     getCurrentUser()
     {
-        const userString = localStorage.getItem("user");
-        if(userString)
+        const staffString = localStorage.getItem("staff");
+        if(staffString)
         {
-            return JSON.parse(userString);
+            return JSON.parse(staffString);
         }
         return false;
     }
