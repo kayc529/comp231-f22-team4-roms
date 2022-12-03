@@ -64,9 +64,9 @@ const StaffsListPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {staffsList.map((staff, index) =>{
+                            {staffsList && staffsList.map((staff, index) =>{
                                   return(
-                                          <tr key="{staff._id}">
+                                          <tr key="{index}">
                                               <th scope="row" className="text-center">{index + 1}</th>
                                               <td className="text-center">{ staff.role }</td>
                                               <td className="text-center">{ staff.firstname }</td>

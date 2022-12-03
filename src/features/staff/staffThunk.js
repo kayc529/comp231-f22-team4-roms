@@ -12,7 +12,7 @@ export const getAllStaffsThunk = async (url, thunkAPI) => {
 
 export const getStaffThunk = async (url, thunkAPI) => {
   try {
-    const res = await customFetch.patch(url);
+    const res = await customFetch.get(url);
     console.log(res.data);
     return res.data;
   } catch (error) {

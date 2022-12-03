@@ -31,7 +31,7 @@ export const editStaff = createAsyncThunk(
   'staffs/editStaff',
   async (updatedStaff, thunkAPI) => {
     return editStaffThunk(
-      `/staffs/edit/${updatedStaff._id}`,
+      `/staffs/edit/${updatedStaff.id}`,
       updatedStaff,
       thunkAPI
     );

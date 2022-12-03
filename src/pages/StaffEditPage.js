@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getStaff, editStaff } from '../features/staff/staffSlice';
 
 const StaffEditPage = () =>
@@ -8,55 +8,78 @@ const StaffEditPage = () =>
     const { isLoading, staff } = useSelector((state) => state.staff);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [message, setMessage] = useState('');
+    const [message] = useState(''); 
+    const [firstname, SetFirstname] = useState('');
+    const [lastname, SetLastname] = useState('');
+    const [username, SetUsername] = useState('');
+    const [password, SetPassword] = useState('');
+    const [role, SetRole] = useState('');
+    const { id } = useParams();
 
     useEffect(()=>{
       document.title = "Edit Staff";
-       getStaffData();
+        setStaffData();
     }, []);
-  
     
-    const [staffData, setStaffData] = useState({
-      firstname: staff.firstname,
-      lastname: staff.lastname,
-      username: staff.username,
-      password: staff.password,
-      role: staff.role
-    });      
-  
-  function handleInputChange(event) {
-    const name = event.target.name;
-    let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    function setStaffData()
+    {
+        dispatch(getStaff(id))
+          .then((response) => {
+            console.log(staff)
+            SetFirstname(response.payload.staff.firstname);
+            SetLastname(response.payload.staff.lastname);
+            SetUsername(response.payload.staff.username);
+            SetPassword(response.payload.staff.password);
+            SetRole(response.payload.staff.role);
+        })
+        .catch((e)=>
+        {
+            console.log(e);
+        });
+    }
 
-    setStaffData(staffData => {
-        return {
-            ...staffData,
-            [name]: value
-        }
-    })
-  }
+    function onChangeFirstname(event)
+    {
+        SetFirstname(event.target.value);
+    }
 
-  const getStaffId = () => {
-    const url = document.URL;
-    const id = url.substring(url.lastIndexOf('/') + 1);
-    return id;
-  };
+    function onChangeLastname(event)
+    {
+        SetLastname(event.target.value);
+    }
 
-  const getStaffData = () => {
-    const id = getStaffId();
-    dispatch(getStaff(id));
-  };
+    function onChangeUsername(event)
+    {
+        SetUsername(event.target.value);
+    }
 
-  const onEdit = async (event) => {
-    event.preventDefault()
-    const updatedStaff = staffData;
-    await dispatch(editStaff(updatedStaff));
-    navigate('../staffs');
-  };
-  
-  if (isLoading) {
-    return <div>Loading</div>;
-  }
+    function onChangePassword(event)
+    {
+        SetPassword(event.target.value);
+    }
+
+    function onChangeRole(event)
+    {
+        SetRole(event.target.value);
+    }
+    
+    const onEdit = async (event) => {
+      event.preventDefault()
+      const updatedStaff =  {
+          id: id,
+          firstname: firstname,
+          lastname: lastname,
+          username: username,
+          password: password,
+          role: role
+      };
+      await dispatch(editStaff(updatedStaff));
+      navigate('../staffs');
+    };
+    
+    if (isLoading) {
+      return <div>Loading</div>;
+    }
     
   function handleMessage()
     {
@@ -84,48 +107,49 @@ const StaffEditPage = () =>
                 <div className="form-group">
                   <label>First Name:</label>
                   <input className="form-control" type="text" name="firstname" id="firstname"
-                    defaultValue={staffData.firstname}
-                    onChange={handleInputChange}
+                    defaultValue={firstname}
+                    onChange={onChangeFirstname}
                     placeholder="First Name" required />
                 </div>
                 <div className="form-group">
                   <label>Last Name:</label>
                   <input className="form-control" type="text" name="lastname" id="lastname"
-                    defaultValue={staffData.lastname}
-                    onChange={handleInputChange}
+                    defaultValue={lastname}
+                    onChange={onChangeLastname}
                     placeholder="Last Name" required />
                 </div>
                 <div className="form-group">
                   <label>Username:</label>
                   <input type="text" className="form-control" id="username" name="username" required
-                    defaultValue={staffData.username}
-                    onChange={handleInputChange}
+                    defaultValue={username}
+                    onChange={onChangeUsername}
                     placeholder="Username" />
                 </div>
                 <div className="form-group">
                   <label>Password:</label>
                   <input type="password" className="form-control" id="password" name="password" required
-                    defaultValue={staffData.password}
-                    onChange={handleInputChange}
+                    defaultValue={password}
+                    onChange={onChangePassword}
                     placeholder="Password" />
                 </div>
 
 
                 {/*MAYBE IN HERE NEED TO INCLUDE RADIO BUTTONS FOR WHAT TYPE OF USER??*/}
                     
-                <div className="form-group" onChange={handleInputChange}>
+                <div className="form-group" onChange={onChangeRole}>
                   <label>What type of user are you?</label>
                   <br />
-                  <input type="radio" className="radio" name="role" value="SERVER" />
+                <input type="radio" className="radio" name="role" value="SERVER" checked={role == "SERVER"} onChange={ SetRole} />
                   <label>Server</label>
-                  <input type="radio" className="radio" name="role" value="chef" />
+                  <input type="radio" className="radio" name="role" value="CHEF" checked={role == "CHEF"} onChange={ SetRole}/>
                   <label>Chef</label>
-                  <input type="radio" className="radio" name="role" value="CS" />
+                  <input type="radio" className="radio" name="role" value="CS" checked={role == "CS"} onChange={ SetRole}/>
                   <label>CS</label>
-                  <input type="radio" className="radio" name="role" value="TECH_SUPPORT" /> <label>Tech Support</label>
-                  <input type="radio" className="radio" name="role" value="MANAGER" />
+                  <input type="radio" className="radio" name="role" value="TECH_SUPPORT" checked={role == "TECH_SUPPORT"} onChange={ SetRole}/>
+                  <label>Tech Support</label>
+                  <input type="radio" className="radio" name="role" value="MANAGER" checked={role == "MANAGER"} onChange={ SetRole}/>
                   <label>Manager</label>
-                  <input type="radio" className="radio" name="role" value="OWNER" />
+                  <input type="radio" className="radio" name="role" value="OWNER" checked={role == "OWNER"} onChange={ SetRole}/>
                   <label>Owner</label>
                 </div>
                 <br />
