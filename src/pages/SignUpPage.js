@@ -79,8 +79,7 @@ const SignUpPage = () => {
 
             if(data.success)
             {
-                navigate('/login');
-                window.location.reload();
+                navigate('/staffs');
             }
             else
             {
@@ -148,7 +147,7 @@ const SignUpPage = () => {
                         <br/>
                         <input type="radio" className="radio" name="role" value="SERVER"/>
                         <label>Server</label>
-                        <input type="radio" className="radio" name="role" value="chef"/>
+                        <input type="radio" className="radio" name="role" value="CHEF"/>
                         <label>Chef</label>
                         <input type="radio" className="radio" name="role" value="CS"/>
                         <label>CS</label>
