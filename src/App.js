@@ -10,8 +10,6 @@ import MenuItemListPage from './pages/MenuItemListPage';
 import AddMenuItemPage from './pages/AddMenuItemPage';
 import EditMenuItemPage from './pages/EditMenuItemPage';
 import UploadMenuItemImagePage from './pages/UploadMenuItemImagePage';
-import StaffsListPage from './pages/StaffsListPage';
-import StaffAddEditPage from './pages/StaffAddEditPage';
 
 import HomePage from './pages/HomePage';
 
@@ -36,9 +34,6 @@ function App() {
               path='upload-image/:id'
               element={<UploadMenuItemImagePage />}
             />
-            <Route path='staffs' element={<StaffsListPage />} />
-            <Route path='staffs/add' element={<StaffAddEditPage />} />
-            <Route path='staffs/edit/:id' element={<StaffAddEditPage />} />
 
             {/* add page here if you want the shared layout*/}
           </Route>
