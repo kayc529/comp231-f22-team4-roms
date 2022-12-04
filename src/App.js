@@ -9,7 +9,7 @@ import MenuItemListPage from './pages/MenuItemListPage';
 import AddMenuItemPage from './pages/AddMenuItemPage';
 import EditMenuItemPage from './pages/EditMenuItemPage';
 import UploadMenuItemImagePage from './pages/UploadMenuItemImagePage';
-import DineIn from './pages/DineIn';
+import HomePg from './pages/HomePg';
 
 
 import HomePage from './pages/HomePage';
@@ -30,7 +30,7 @@ function App() {
             <Route path='menu-items' element={<MenuItemListPage />} />
             <Route path='add-menu-item' element={<AddMenuItemPage />} />
             <Route path='edit-menu-item/:id' element={<EditMenuItemPage />} />
-            <Route path="dinein" element={<DineIn/>} />
+            <Route path="homepg" element={<HomePg/>} />
             <Route
               path='upload-image/:id'
               element={<UploadMenuItemImagePage />}

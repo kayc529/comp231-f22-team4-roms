@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 
-function DineIn(){
+function HomePg(){
     return (
         <div className="container">
             <div className="row">
@@ -73,4 +73,4 @@ function DineIn(){
 
 
   
-  export default DineIn;
+  export default HomePg;
