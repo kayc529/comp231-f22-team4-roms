@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import ExampleNotFoundPage from './pages/example/ExampleNotFoundPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
+import SignOutPage from './pages/SignOutPage';
 import Menu from './components/Menu';
 import CartPage from './pages/Cart';
 import MenuItemListPage from './pages/MenuItemListPage';
@@ -24,6 +25,7 @@ function App() {
             {/*<Route path='another' element={<ExampleAnotherPage />} />*/}
             <Route path='signin' element={<SignInPage />} />
             <Route path='signup' element={<SignUpPage />} />
+            <Route path='signout' element={<SignOutPage />} />
             <Route path='cart' element={<CartPage />} />
             <Route path='menu-items' element={<MenuItemListPage />} />
             <Route path='add-menu-item' element={<AddMenuItemPage />} />
