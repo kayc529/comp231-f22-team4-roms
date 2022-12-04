@@ -12,7 +12,7 @@ import EditMenuItemPage from './pages/EditMenuItemPage';
 import UploadMenuItemImagePage from './pages/UploadMenuItemImagePage';
 import StaffsListPage from './pages/StaffsListPage';
 import StaffEditPage from './pages/StaffEditPage';
-
+import HomePg from './pages/HomePg';
 import HomePage from './pages/HomePage';
 
 function App() {
@@ -32,13 +32,13 @@ function App() {
             <Route path='menu-items' element={<MenuItemListPage />} />
             <Route path='add-menu-item' element={<AddMenuItemPage />} />
             <Route path='edit-menu-item/:id' element={<EditMenuItemPage />} />
+            <Route path='homepg' element={<HomePg />} />
             <Route
               path='upload-image/:id'
               element={<UploadMenuItemImagePage />}
             />
             <Route path='staffs' element={<StaffsListPage />} />
             <Route path='staffs/edit/:id' element={<StaffEditPage />} />
-
             {/* add page here if you want the shared layout*/}
           </Route>
           {/* add page here if you don't want the shared layout*/}
