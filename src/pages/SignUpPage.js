@@ -47,9 +47,7 @@ const SignUpPage = () => {
                     
                     <div class="form-group">
                         <label>What type of user are you?</label>
-                        <br/>
-                        <input type="radio" class="radio" name="usertype" value="customer"/>
-                        <label>Customer</label>
+                        <br/>                        
                         <input type="radio" class="radio" name="usertype" value="server"/>
                         <label>Server</label>
                         <input type="radio" class="radio" name="usertype" value="manager"/>                      
