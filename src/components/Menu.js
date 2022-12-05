@@ -24,7 +24,7 @@ const Menu = () => {
                     <li><a className="dropdown-item" href="/menu-items">Menu Items</a></li>
                     <li><hr className="dropdown-divider"/></li>
                     <li><a className="dropdown-item" href="/">Order</a></li>
-                    <li><a className="dropdown-item" href="/">Order History</a></li>
+                    <li><a className="dropdown-item" href="/order-history">Order History</a></li>
                     <li><a className="dropdown-item" href="/">User</a></li>
                     <li><a className="dropdown-item" href="/">Setting</a></li>
                   </ul>

@@ -8,26 +8,39 @@ const EditMenuItemPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // handle form data
   const [formData, setFormData] = useState({
-    name: menuItem.name,
-    desc: menuItem.desc,
-    price: menuItem.price,
+    _id: '',
+    name: '',
+    desc: '',
+    price: '',
     isAvailable: true,
   });
 
-  console.log(formData);
+  useEffect(() => {
+    if (menuItem) {
+      setFormData({
+        _id: menuItem._id,
+        name: menuItem.name,
+        desc: menuItem.desc,
+        price: menuItem.price,
+        isAvailable: menuItem.isAvailable,
+      });
+    }
+  }, [menuItem]);
 
   function handleInputChange(event) {
     const name = event.target.name;
-    let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    let value =
+      event.target.type === 'checkbox'
+        ? event.target.checked
+        : event.target.value;
 
-    setFormData(formData => {
-        return {
-            ...formData,
-            [name]: value
-        }
-    })
+    setFormData((formData) => {
+      return {
+        ...formData,
+        [name]: value,
+      };
+    });
   }
 
   useEffect(() => {
@@ -46,17 +59,16 @@ const EditMenuItemPage = () => {
   };
 
   const onSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     //copy the original menu item first, and then update the fields
-    const updatedMenuItem = formData;
     // const updatedMenuItem = {
     //   name: event.target.elements.name.value,
     //   desc: event.target.elements.desc.value,
     // };
-    await dispatch(editMenuItem(updatedMenuItem));
+    console.log(formData);
+    await dispatch(editMenuItem(formData));
     //can do something after submitted
     navigate('../menu-items');
-    console.log(updatedMenuItem);
   };
 
   if (isLoading) {
@@ -64,18 +76,7 @@ const EditMenuItemPage = () => {
     return <div>Loading</div>;
   }
 
-  // Demo Data
-  const FOODCATERGORY = [
-    {name: "CLASSIC BREAKFASTS"},
-    {name: "BENNYS"},
-    {name: "DELUXE BREAKFASTS"},
-    {name: "SIDES"}
-  ]
-
-  const ORDERTYPE = [
-    {name: "Dinein"},
-    {name: "Takeaway"}
-  ]
+  const ORDERTYPE = [{ name: 'Dinein' }, { name: 'Takeaway' }];
 
   return (
     <div className='container'>
@@ -91,10 +92,19 @@ const EditMenuItemPage = () => {
             <input id="name" name="name" onChange={handleInputChange} defaultValue={formData.name} type="text" className="form-control"/>
           </div>
         </div>
-        <div className="mb-3 row">
-          <label htmlFor="desc" className="col-sm-2 col-form-label">Description</label>
-          <div className="col-sm-10">
-            <textarea id="desc" name="desc" onChange={handleInputChange} defaultValue={formData.desc} className="form-control" rows={5}></textarea>
+        <div className='mb-3 row'>
+          <label htmlFor='desc' className='col-sm-2 col-form-label'>
+            Description
+          </label>
+          <div className='col-sm-10'>
+            <textarea
+              id='desc'
+              name='desc'
+              onChange={handleInputChange}
+              defaultValue={formData.desc}
+              className='form-control'
+              rows={5}
+            ></textarea>
           </div>
         </div>
         <div className="mb-3 row">
@@ -120,19 +130,6 @@ const EditMenuItemPage = () => {
                 onChange={handleInputChange}
                 defaultChecked={menuItem.isAvailable} autoComplete="off"/>
             </div>
-          </div>
-        </div>
-        <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Category</label>
-          <div className="col-sm-4">
-            {FOODCATERGORY.map((item, index) => {
-              return (
-                <div key={index} className="form-check">
-                  <input id={"category-"+index} defaultValue={"category-"+index} onChange={handleInputChange} name="category" className="form-check-input" type="checkbox" />
-                  <label htmlFor={"category-"+index} className="form-check-label">{item.name}</label>
-                </div>
-              );
-            })}
           </div>
         </div>
         <div className="mb-3 row">

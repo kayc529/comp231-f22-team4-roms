@@ -38,19 +38,13 @@ const HomePage = () => {
         </div>
 
         <div className="row">
-          <div className="col-2">
-            {FOODCATERGORY.map((item, index) => {
-                    return <div key={index} className="p-4">{item.name}</div>;
-            })}
-          </div>
-          <div className="col-8">
+          <div className="col-8 mx-auto">
             <div className='row'>
                 {menuItemList.map((item, index) => {
                     return <FoodItem key={index} prop={item} />;
                 })}
             </div>
           </div>
-          <div className="col-2">Cart</div>
         </div>
       </div>
     );

@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getMenuItem } from '../features/menu/menuSlice';
+import { addToCart } from '../features/cart/cartActions';
 
 const FoodDetailPage = () => {
+  const { isLoading, menuItem } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,19 +22,24 @@ const FoodDetailPage = () => {
     dispatch(getMenuItem(menuItemId));
   };
 
+  // Cart
+  const addMenuItemToCart = () => {
+    dispatch(addToCart(menuItem));
+  };
+
   return (
-    <div className="container">
-      <h1>Food Name</h1>
+    <div className="container pt-5">
       <div className="card">
         <div className="row">
           <div className="col-8">
             This is an image
           </div>
           <div className="col-4 p-4">
-            <div class="pb-3 d-flex"><a className="btn btn-outline-dark ms-auto" href="/"><i className="bi bi-arrow-return-left"></i> cancel</a></div>
-            <div class="pb-3">This is food description</div>
-            <div class="pb-3">$ 0</div>
-            <div class="pb-3"><button className="btn btn-outline-dark"><i class="bi bi-cart"></i> Add to Cart</button></div>
+            <div className="pb-3 d-flex"><a className="btn btn-outline-dark ms-auto" href="/"><i className="bi bi-arrow-return-left"></i> cancel</a></div>
+            <h2>{menuItem.name}</h2>
+            <div className="pb-3">{menuItem.desc}</div>
+            <div className="pb-3">$ {menuItem.price}</div>
+            <div className="pb-3"><button onClick={addMenuItemToCart} className="btn btn-outline-dark"><i className="bi bi-plus"></i> Add to Order</button></div>
           </div>
         </div>
       </div>
