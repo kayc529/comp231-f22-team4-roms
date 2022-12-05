@@ -60,12 +60,7 @@ const EditMenuItemPage = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    //copy the original menu item first, and then update the fields
-    // const updatedMenuItem = {
-    //   name: event.target.elements.name.value,
-    //   desc: event.target.elements.desc.value,
-    // };
-    console.log(formData);
+
     await dispatch(editMenuItem(formData));
     //can do something after submitted
     navigate('../menu-items');
