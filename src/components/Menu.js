@@ -1,6 +1,34 @@
 import { Outlet } from 'react-router-dom';
-
+import React, { useEffect, useState } from 'react';
+import AuthService from '../features/authentication/auth-service';
+  
 const Menu = () => {
+
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+
+  useEffect(()=>{
+    setIsLoggedIn(AuthService.getCurrentUser());
+  }, []);
+
+  function toggleLogin()
+  {
+    if(isLoggedIn)
+    {
+
+      return(
+        <li><a className="dropdown-item" href="/signup">Sign Up</a>
+          <a className="dropdown-item" href="/signout">Sign Out</a></li>
+      );
+      
+    }
+    else
+    {
+      return(
+        <li><a className="dropdown-item" href="/signin">Sign In</a></li>
+      );
+    }
+  }
+  
   return (
     <>
       <header>
@@ -14,18 +42,17 @@ const Menu = () => {
                   <a className="nav-link active" href="/">Home</a>
                 </li>
               </ul>
-
+              
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Admin</a>
                   <ul className="dropdown-menu dropdown-menu-end">
-                    <li><a className="dropdown-item" href="/signin">Sign In</a></li>
-                    <li><a className="dropdown-item" href="/signup">Sign Up</a></li>
+                    { toggleLogin() }
                     <li><a className="dropdown-item" href="/menu-items">Menu Items</a></li>
                     <li><hr className="dropdown-divider"/></li>
                     <li><a className="dropdown-item" href="/">Order</a></li>
                     <li><a className="dropdown-item" href="/order-history">Order History</a></li>
-                    <li><a className="dropdown-item" href="/">User</a></li>
+                    <li><a className="dropdown-item" href="/staffs">Staff</a></li>
                     <li><a className="dropdown-item" href="/">Setting</a></li>
                   </ul>
                 </li>
