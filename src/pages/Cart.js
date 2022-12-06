@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ADD_TO_CART } from '../features/cart/cartConstants';
 import { addToCart, deleteFromCart } from '../features/cart/cartActions';
 import DatePicker from "react-datepicker";
-import {setMinutes, setHours} from "date-fns";
+import { setMinutes, setHours } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Cart = () => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../features/authentication/auth-service';
+import { toast } from 'react-toastify';
 
 const SignUpPage = () => {
  
@@ -9,7 +10,6 @@ const SignUpPage = () => {
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [role, setRole] = useState('');
-    const [message, setMessage] = useState('');
     const navigate = useNavigate(); 
 
     useEffect(()=>{
@@ -40,18 +40,6 @@ const SignUpPage = () => {
     {
         setRole(event.target.value);
     }
-    
-    function handleMessage()
-    {
-        if(message.length > 0)
-        {
-            return(
-            <div id="messageArea" className="alert alert-danger">
-                {message}
-              </div>
-            );
-        }
-    }
 
     function clearForm(event)
     {
@@ -80,15 +68,16 @@ const SignUpPage = () => {
             if(data.success)
             {
                 navigate('/staffs');
+                toast("Create Staff Successfully");
             }
             else
             {
-                setMessage(data.message);
+                toast.error(data.message);
                 clearForm(null);
             }
             
         }, error => {
-            setMessage("Server Error!");
+            toast.error("Server Error!");
         });
     }
 
@@ -100,8 +89,6 @@ const SignUpPage = () => {
           <div className="col12" align="center">
             <div className="signup-container">
                 <h1>Sign Up</h1>
-                
-                {handleMessage()}
                       
                 {/*NEED TO MAKE THIS MATCH THE MODEL FOR WHAT WE ACTUALLY NEED*/}
                 {/*ALSO NEED TO MAKE THE ENDPOINTS PROPER LINK UP -- SUBMIT CREATES A NEW USER ON THE BACKEND AND PUSHES TO DB*/}
