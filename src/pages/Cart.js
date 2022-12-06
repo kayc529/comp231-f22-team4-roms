@@ -82,13 +82,13 @@ const Cart = () => {
                     onClick={addSample2}>
                         add sample2 (To be deleted)
                     </button>
-                          
+
 
 
                     </div>
                 </div>
                 <div className="row p-3">
-                    {cart.map(item => (
+                    {cart.map((item, index) => (
                         <div className="cartItem">
                             <div className="itemDetails row align-items-center">
                                 <div className="col-2 ">
