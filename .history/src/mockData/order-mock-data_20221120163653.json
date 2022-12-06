@@ -1,0 +1,51 @@
+[
+    {
+        "orderID": 10001,
+        "item":"Fish and Chips",
+        "datatime": "Nov 19, 2022 14:35",
+        "totalPrice": 20,
+        "quantity": 2,
+        "isAccepted": null,
+        "Status": null
+    },
+
+    {
+        "orderID": 10002,
+        "item":"Cheese Burger",
+        "datatime": "Nov 19, 2022 11:23",
+        "totalPrice": 14,
+        "quantity": 1,
+        "isAccepted": null,
+        "Status": null
+    },
+
+    {
+        "orderID": 10003,
+        "item":"Egg and Cheese Baked Potato",
+        "datatime": "Nov 18, 100 09:15",
+        "totalPrice": 24,
+        "quantity": 3,
+        "isAccepted": null,
+        "Status": null
+    },
+
+    {
+        "orderID": 10004,
+        "item":"Beef Wrap",
+        "datatime": "Nov 17, 2022 19:10",
+        "totalPrice": 12,
+        "quantity": 1,
+        "isAccepted": null,
+        "Status": null
+    },
+
+    {
+        "orderID": 10001,
+        "item":"Spaghetti Bolognese",
+        "datatime": "Nov 19, 2022 20:41",
+        "totalPrice": 46,
+        "quantity": 2,
+        "isAccepted": null,
+        "Status": null
+    }
+]
