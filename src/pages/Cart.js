@@ -36,16 +36,6 @@ const Cart = () => {
 			payload:  cart,
 		});
     };
-
-    //to be deleted
-    const addSample = () => {
-        let sampleItem = { _id: "1", name: "sample item", price: 50, desc: "sample sample sample", imageUrl: "sample.jpg" };
-		dispatch(addToCart(sampleItem));
-    };
-    const addSample2 = () => {
-        let sampleItem = { _id: "2", name: "sample item2", price: 30, desc: "sample sample sample", imageUrl: "sample.jpg" };
-		dispatch(addToCart(sampleItem));
-    };
  
     const handleMenu = evt => {
         navigate('/menu');
@@ -72,19 +62,6 @@ const Cart = () => {
                 <div className="row bg-light p-3">
                     <div className="col display-5 fw-bold">
                         My Cart 
-                    
-                          
-                    <button className='btn btn-light text-primary ml-4'
-                    onClick={addSample}>
-                        add sample (To be deleted)
-                          </button>
-                          <button className='btn btn-light text-primary ml-4'
-                    onClick={addSample2}>
-                        add sample2 (To be deleted)
-                    </button>
-                          
-
-
                     </div>
                 </div>
                 <div className="row p-3">
