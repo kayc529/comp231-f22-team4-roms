@@ -19,12 +19,19 @@ export const addToCart = item => async dispatch => {
 		cart.push(addItem);
 
 		localStorage.setItem('cart', JSON.stringify(cart));
-
-		dispatch({
+	} else {
+		cart.forEach(item => {
+			if (item._id === exitItem[0]._id) {
+				item.count += 1;
+			}
+		});
+		localStorage.setItem('cart', JSON.stringify(cart));
+	}
+	dispatch({
 			type: ADD_TO_CART,
 			payload: cart,
 		});
-	}
+	
 };
 
 export const deleteFromCart = item => async dispatch => {
