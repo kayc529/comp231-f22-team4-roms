@@ -4,10 +4,16 @@ import axios from '../utils/orderFetch';
 import { Link } from "react-router-dom";
 import moment from 'moment';
 
+
+
 const ManageOrder =()=>{
     const [orderData, setOrderData] = useState([]);
+    // const orderStatus = Object.keys(orderData).map(function (key){
+    //     return orderData[key].status});
+    // const [orderState, setOrderState] = useState(orderStatus);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [filterState, setFilterState] = useState("all");
+    
 
     useEffect(()=>{
         const fetchData = async () =>{
@@ -19,13 +25,15 @@ const ManageOrder =()=>{
     }, []); 
     
     return (
-        <div className='main-container' style={{ padding: "15px" }} >
+        <div className='p-grid gap-3' style={{ padding: "3rem" }} >
             
             <h2>Manage Order</h2>     
-            <Form.Label className="mb-1"> Search by Reference Number or Status </Form.Label>
-             <Col sm="6">
+
+            <Form.Label className="mb-3"> Search by Reference Number or Status </Form.Label>
+             <Col sm="10">
             <Form.Control className="mb-3" type="text" placeholder="e.g.: 637e6778 or Accepted"
                 onChange={(e) =>{setSearchKeyword(e.target.value)}}    
+            
             />
              </Col>   
             <DropdownButton id="dropdown-basic-button" className="mb-3" variant="success" title=
@@ -37,7 +45,8 @@ const ManageOrder =()=>{
                 <Dropdown.Item eventKey="today">Today's  Orders </Dropdown.Item>
                 <Dropdown.Item eventKey="past">Past Orders</Dropdown.Item>
             </DropdownButton>
-
+            
+            {console.log(filterState)}
             <Table striped bordered hover variant="light">
                 <thead>
                     <tr>
@@ -53,6 +62,7 @@ const ManageOrder =()=>{
                 <tbody>   
                     {orderData.filter((order) => {
                         let todayF = moment(new Date()).format("YYYY-MM-DD")
+
                         if (filterState == "all") {
                              if (order.referenceNumber == searchKeyword || order.status == searchKeyword.toUpperCase())
                                 return order;
@@ -93,9 +103,14 @@ const ManageOrder =()=>{
                     </tr>
                 ))} 
                 </tbody>
-            </Table>                
+            </Table>
+           
+                
         </div>
+
     );
+
+
 };
 
 export default ManageOrder;

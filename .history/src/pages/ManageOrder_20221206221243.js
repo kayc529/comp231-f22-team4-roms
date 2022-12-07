@@ -6,6 +6,9 @@ import moment from 'moment';
 
 const ManageOrder =()=>{
     const [orderData, setOrderData] = useState([]);
+    // const orderStatus = Object.keys(orderData).map(function (key){
+    //     return orderData[key].status});
+    // const [orderState, setOrderState] = useState(orderStatus);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [filterState, setFilterState] = useState("all");
 
@@ -23,6 +26,7 @@ const ManageOrder =()=>{
             
             <h2>Manage Order</h2>     
             <Form.Label className="mb-1"> Search by Reference Number or Status </Form.Label>
+            <div style={{display: "inline-block"}}>
              <Col sm="6">
             <Form.Control className="mb-3" type="text" placeholder="e.g.: 637e6778 or Accepted"
                 onChange={(e) =>{setSearchKeyword(e.target.value)}}    
@@ -37,7 +41,7 @@ const ManageOrder =()=>{
                 <Dropdown.Item eventKey="today">Today's  Orders </Dropdown.Item>
                 <Dropdown.Item eventKey="past">Past Orders</Dropdown.Item>
             </DropdownButton>
-
+            </div>
             <Table striped bordered hover variant="light">
                 <thead>
                     <tr>

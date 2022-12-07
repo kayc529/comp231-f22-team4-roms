@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Table, Form, Dropdown, DropdownButton, Col} from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import axios from '../utils/orderFetch';
 import { Link } from "react-router-dom";
 import moment from 'moment';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const ManageOrder =()=>{
     const [orderData, setOrderData] = useState([]);
+    // const orderStatus = Object.keys(orderData).map(function (key){
+    //     return orderData[key].status});
+    // const [orderState, setOrderState] = useState(orderStatus);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [filterState, setFilterState] = useState("all");
+    
 
     useEffect(()=>{
         const fetchData = async () =>{
@@ -19,24 +24,29 @@ const ManageOrder =()=>{
     }, []); 
     
     return (
-        <div className='main-container' style={{ padding: "15px" }} >
+        <div className='control-main'>
             
             <h2>Manage Order</h2>     
-            <Form.Label className="mb-1"> Search by Reference Number or Status </Form.Label>
-             <Col sm="6">
-            <Form.Control className="mb-3" type="text" placeholder="e.g.: 637e6778 or Accepted"
-                onChange={(e) =>{setSearchKeyword(e.target.value)}}    
-            />
-             </Col>   
-            <DropdownButton id="dropdown-basic-button" className="mb-3" variant="success" title=
-                {(filterState == "all") ? "All Orders" : (filterState == "today") ? "Today's Orders" 
-                : "Past Orders"} 
-                onSelect={(e) => setFilterState(e)}>
-                <Dropdown.Item eventKey="all">All Orders</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item eventKey="today">Today's  Orders </Dropdown.Item>
-                <Dropdown.Item eventKey="past">Past Orders</Dropdown.Item>
-            </DropdownButton>
+            
+            <label> Search by Reference Number or Status </label>
+                <input className="txtSearch" placeholder='e.g.: 637e6778 or Accepted'
+                type="text"
+                size={30}
+                onChange={(e) =>{setSearchKeyword(e.target.value)}}                     
+            />      
+
+
+            <select className="filterDropdown"
+                value={filterState}
+                onChange={(e) => setFilterState(e.target.value)}
+                //defaultValue={filterState}
+            >
+                <option value="all">All Orders</option>
+                <option value="today">Today's Orders</option>
+                <option value="past">Past Orders</option>
+            </select>
+
+            <DropdownButton id="dropdown-basic-button"
 
             <Table striped bordered hover variant="light">
                 <thead>
@@ -53,6 +63,7 @@ const ManageOrder =()=>{
                 <tbody>   
                     {orderData.filter((order) => {
                         let todayF = moment(new Date()).format("YYYY-MM-DD")
+
                         if (filterState == "all") {
                              if (order.referenceNumber == searchKeyword || order.status == searchKeyword.toUpperCase())
                                 return order;
@@ -93,9 +104,14 @@ const ManageOrder =()=>{
                     </tr>
                 ))} 
                 </tbody>
-            </Table>                
+            </Table>
+           
+                
         </div>
+
     );
+
+
 };
 
 export default ManageOrder;

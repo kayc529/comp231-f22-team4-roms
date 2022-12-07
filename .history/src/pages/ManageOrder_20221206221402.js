@@ -6,6 +6,9 @@ import moment from 'moment';
 
 const ManageOrder =()=>{
     const [orderData, setOrderData] = useState([]);
+    // const orderStatus = Object.keys(orderData).map(function (key){
+    //     return orderData[key].status});
+    // const [orderState, setOrderState] = useState(orderStatus);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [filterState, setFilterState] = useState("all");
 

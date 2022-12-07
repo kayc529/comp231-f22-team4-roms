@@ -6,6 +6,9 @@ import moment from 'moment';
 
 const ManageOrder =()=>{
     const [orderData, setOrderData] = useState([]);
+    // const orderStatus = Object.keys(orderData).map(function (key){
+    //     return orderData[key].status});
+    // const [orderState, setOrderState] = useState(orderStatus);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [filterState, setFilterState] = useState("all");
 
@@ -19,10 +22,11 @@ const ManageOrder =()=>{
     }, []); 
     
     return (
-        <div className='main-container' style={{ padding: "15px" }} >
+        <div className='d-grid gap-2' style={{ padding: "15px" }} >
             
             <h2>Manage Order</h2>     
-            <Form.Label className="mb-1"> Search by Reference Number or Status </Form.Label>
+            <div style={{display : 'inline-block'}}>
+            <Form.Label> Search by Reference Number or Status </Form.Label>
              <Col sm="6">
             <Form.Control className="mb-3" type="text" placeholder="e.g.: 637e6778 or Accepted"
                 onChange={(e) =>{setSearchKeyword(e.target.value)}}    

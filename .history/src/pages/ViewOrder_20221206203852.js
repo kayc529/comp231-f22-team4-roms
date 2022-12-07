@@ -2,8 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {Table} from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import axios from '../utils/orderFetch';
+import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+
+
+
 
 const ViewOrder = () =>{
 
@@ -62,7 +66,7 @@ const ViewOrder = () =>{
     }
 
     return (
-        <div className='d-grid gap-2' style={{ padding: "15px" }} >
+        <div className='control-main'>
             <Card style={{ width: '100%' }}>
                 <Card.Body>
                     <Card.Title>Reference Number: {singleOrder.referenceNumber}</Card.Title>
@@ -81,24 +85,30 @@ const ViewOrder = () =>{
             </Card>         
             
         <Table striped bordered hover variant="light">
-            <thead>
-                <tr>
-                    <th>Food item</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                 </tr>
-            </thead>
+                <thead>
+                    <tr>
+                        <th>Food item</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
                 
-            <tbody>   
+                <tbody>   
                 {orderItem.map((item, index) =>
                     <tr key={index}> 
-                        <td> {item.menuItem.name} </td>
-                        <td>{item.quantity} </td>
-                        <td >$ {onSubTotal(item.quantity, item.menuItem.price)} </td> 
-                    </tr>     
+                         <td>
+                            {item.menuItem.name}
+                        </td>
+                        <td >{item.quantity}
+                        </td>
+                        <td >$ {onSubTotal(item.quantity, item.menuItem.price)}
+                        
+                        </td> 
+                    </tr>
+                        
                 )}
-            </tbody>
-        </Table>
+                </tbody>
+            </Table>
     </div>          
     );
 }

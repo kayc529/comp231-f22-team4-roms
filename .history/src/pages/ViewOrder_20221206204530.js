@@ -5,6 +5,9 @@ import axios from '../utils/orderFetch';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 
+
+
+
 const ViewOrder = () =>{
 
     let params  = useParams();
@@ -62,7 +65,7 @@ const ViewOrder = () =>{
     }
 
     return (
-        <div className='d-grid gap-2' style={{ padding: "15px" }} >
+        <div className='control-main'>
             <Card style={{ width: '100%' }}>
                 <Card.Body>
                     <Card.Title>Reference Number: {singleOrder.referenceNumber}</Card.Title>
