@@ -5,14 +5,17 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import SignOutPage from './pages/SignOutPage';
 import Menu from './components/Menu';
+import FoodDetailPage from './pages/FoodDetailPage';
 import CartPage from './pages/Cart';
 import MenuItemListPage from './pages/MenuItemListPage';
 import AddMenuItemPage from './pages/AddMenuItemPage';
 import EditMenuItemPage from './pages/EditMenuItemPage';
 import UploadMenuItemImagePage from './pages/UploadMenuItemImagePage';
+import OrderHistoryPage from './pages/OrderHistoryPage';
+import OrderHistoryDetailPage from './pages/OrderHistoryDetailPage';
 import StaffsListPage from './pages/StaffsListPage';
 import StaffEditPage from './pages/StaffEditPage';
-
+import HomePg from './pages/HomePg';
 import HomePage from './pages/HomePage';
 
 function App() {
@@ -22,7 +25,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Menu />}>
             <Route index element={<HomePage />} />
-
+            <Route path='food-item/:id' element={<FoodDetailPage />} />
             {/*<Route path='/home2' element={<ExampleHomePage2 />} />*/}
             {/*<Route path='another' element={<ExampleAnotherPage />} />*/}
             <Route path='signin' element={<SignInPage />} />
@@ -32,13 +35,15 @@ function App() {
             <Route path='menu-items' element={<MenuItemListPage />} />
             <Route path='add-menu-item' element={<AddMenuItemPage />} />
             <Route path='edit-menu-item/:id' element={<EditMenuItemPage />} />
+            <Route path='order-history' element={<OrderHistoryPage />} />
+            <Route path='order-history/:id' element={<OrderHistoryDetailPage />} />
+            <Route path='homepg' element={<HomePg />} />
             <Route
               path='upload-image/:id'
               element={<UploadMenuItemImagePage />}
             />
             <Route path='staffs' element={<StaffsListPage />} />
             <Route path='staffs/edit/:id' element={<StaffEditPage />} />
-
             {/* add page here if you want the shared layout*/}
           </Route>
           {/* add page here if you don't want the shared layout*/}

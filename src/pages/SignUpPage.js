@@ -144,8 +144,8 @@ const SignUpPage = () => {
                     
                     <div className="form-group" onChange={onChangeRole}>
                         <label>What type of user are you?</label>
-                        <br/>
-                        <input type="radio" className="radio" name="role" value="SERVER"/>
+                        <br/>                        
+                        <input type="radio" class="radio" name="usertype" value="server"/>
                         <label>Server</label>
                         <input type="radio" className="radio" name="role" value="CHEF"/>
                         <label>Chef</label>
