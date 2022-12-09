@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import exampleReducer from './features/example/exampleSlice';
 import cartReducers from './features/cart/cartReducers';
 import menuReducer from './features/menu/menuSlice';
+import orderReducer from './features/order/orderSlice';
 import staffReducer from './features/staff/staffSlice';
 
 
@@ -12,7 +13,8 @@ const store = configureStore({
     example: exampleReducer,
     cart: cartReducers,
     menu: menuReducer,
-    staff: staffReducer
+    staff: staffReducer,
+    order: orderReducer
   },
 });
 

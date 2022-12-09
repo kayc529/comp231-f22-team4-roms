@@ -89,7 +89,7 @@ const Cart = () => {
                 </div>
                 <div className="row p-3">
                     {cart.map((item, index) => (
-                        <div className="cartItem">
+                        <div key={index} className="cartItem">
                             <div className="itemDetails row align-items-center">
                                 <div className="col-2 ">
                                     <img className='img-fluid w-100 img-thumbnail'
