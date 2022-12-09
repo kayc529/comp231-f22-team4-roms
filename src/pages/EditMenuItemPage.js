@@ -71,7 +71,7 @@ const EditMenuItemPage = () => {
     return <div>Loading</div>;
   }
 
-  const ORDERTYPE = [{ name: 'Dinein' }, { name: 'Takeaway' }];
+  const ORDERTYPE = [{ name: 'DINE_IN' }, { name: 'TAKE_AWAY' }];
 
   return (
     <div className='container'>

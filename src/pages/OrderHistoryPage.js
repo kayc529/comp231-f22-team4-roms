@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllOrders } from '../features/order/orderSlice';
+import { format } from 'date-fns'
 
 const OrderHistoryPage = () => {
     const { orderList } = useSelector((state) => state.order);
@@ -22,42 +23,46 @@ const OrderHistoryPage = () => {
                 <table className='table table-hover'>
                     <thead>
                         <tr>
-                            <th className="text-center" width="150">Order No</th>
-                            <th className="text-center" width="200">Order Date</th>
-                            <th className="text-center" width="200">Order Type</th>
-                            <th>Food Item</th>
-                            <th className="text-end">Total price</th>
+                            <th className="text-center" width="1">Order No</th>
+                            <th className="text-center">Date</th>
+                            <th className="text-center" width="120">Order Type</th>
+                            <th className="text-center" width="120">Status</th>
+                            <th className="text-end">Total</th>
                             <th className='text-end' width="100">Action</th>
                         </tr>
-                        <tr className='bg-light'>
-                            <td><input name="filterOrderNo" type="text" className="form-control" placeholder="Order No"/></td>
+                        {/* <tr className='bg-light'>
                             <td><input name="filterOrderDate" type="text" className="form-control" placeholder="Order Date"/></td>
+                            <td></td>
                             <td><select name="filterOrderType" className="form-control">
                                     <option value="ALL">All</option>
                                     <option value="DINEIN">Dine in</option>
                                     <option value="TAKEAWAY">Take away</option>
                                 </select></td>
-                            <td><input name="filterFoodItem" type="text" className="form-control" placeholder="Food Item"/></td>
+                            <td><input name="filterStatus" type="text" className="form-control" placeholder="status"/></td>
                             <td></td>
                             <td></td>
-                        </tr>
+                        </tr> */}
                     </thead>
                     <tbody>
                     {orderList.map((item, index) => {
                         return (
                         <tr key={index}>
-                            <td className="text-center">{item.orderNo}</td>
-                            <td className="text-center">{item.orderDate}</td>
-                            <td></td>
-                            <td></td>
-                            <td className="text-end">$ {item.price}</td>
-                            <td className="text-end"><a href={"/order-history/"+item.orderNo} className="btn btn-outline-primary">View</a></td>
+                            <td className="text-center">{item.referenceNumber}</td>
+                            <td className="text-center">
+                                {item.pickupTime && 'Pickup : ' + item.pickupTime}
+                                {item.reserveTime && 'Reserve : ' + format(new Date(item.reserveTime), 'MMM d, h:mm a')}
+                            </td>
+                            <td className='text-center'>{item.orderType}</td>
+                            <td className='text-center'>{item.status}</td>
+                            <td className="text-end">$ </td>
+                            <td className="text-end"><a href={"/order-history/"+item._id} className="btn btn-outline-primary">View</a></td>
                         </tr>
                         )
                     })}
                     </tbody>
                 </table>
             </div>
+            {orderList.length}
         </div>
     );
   };

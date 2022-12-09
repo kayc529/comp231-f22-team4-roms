@@ -52,7 +52,7 @@ const Cart = () => {
     };
 
     const handleCheckout = evt => {
-        navigate('/shipping');
+        navigate('/checkout');
     };
     
     const handlePrevious = evt => {
