@@ -2,11 +2,18 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteStaff, getAllStaffs } from '../features/staff/staffSlice';
+import { getStaffRole } from '../utils/roleHelper';
 
 const StaffsListPage = () => {
   const { staffsList, isLoading } = useSelector((state) => state.staff);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const role = getStaffRole();
+  //only owner can see staff list
+  if (role !== 'OWNER') {
+    navigate('/ManageOrder');
+  }
 
   useEffect(() => {
     document.title = 'Staff List';
@@ -34,7 +41,7 @@ const StaffsListPage = () => {
   };
 
   const onAddStaff = () => {
-    navigate('/add-user');
+    navigate('/add-staff');
   };
 
   if (isLoading) {
@@ -86,7 +93,7 @@ const StaffsListPage = () => {
               {staffsList &&
                 staffsList.map((staff, index) => {
                   return (
-                    <tr key='{index}'>
+                    <tr key={staff._id}>
                       <th scope='row' className='text-center'>
                         {index + 1}
                       </th>

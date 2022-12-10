@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSetting, updateSetting } from '../features/setting/settingSlice';
+import { useNavigate } from 'react-router-dom';
+import { getStaffRole } from '../utils/roleHelper';
 
 const SettingPage = () => {
   const { isLoading, setting } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -12,6 +15,12 @@ const SettingPage = () => {
     openHour: '',
     isOpen: true,
   });
+
+  const role = getStaffRole();
+  //only owner and managers can edit restaurant setting
+  if (role !== 'OWNER' && role !== 'MANAGER') {
+    navigate('/ManageOrder');
+  }
 
   useEffect(() => {
     if (setting) {
