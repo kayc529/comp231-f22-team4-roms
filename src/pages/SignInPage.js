@@ -35,7 +35,7 @@ const SignInPage = () => {
         .then((data) => {
             if(data.success)
             {
-                navigate("/order");
+                navigate("/ManageOrder");
                 window.location.reload();
                 toast("Login successfully!")
             }
