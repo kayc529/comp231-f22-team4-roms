@@ -26,6 +26,9 @@ const HomePage = () => {
 
   const filter = (orderType) => {
     localStorage.setItem("orderType", orderType);
+    if (localStorage.getItem("cart")) {
+      localStorage.removeItem("cart");
+    }
     getMenuItemList();
   };
 
