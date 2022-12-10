@@ -1,28 +1,29 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getSettingThunk, updateSettingThunk } from "./settingThunk";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import { getSettingThunk, updateSettingThunk } from './settingThunk';
 
 const initialState = {
   setting: {},
   isLoading: false,
-  errorMsg: "",
+  errorMsg: '',
 };
 
 export const getSetting = createAsyncThunk(
-  "setting/getSetting",
+  'setting/getSetting',
   async (_, thunkAPI) => {
-    return getSettingThunk("/setting", thunkAPI);
+    return getSettingThunk('/setting', thunkAPI);
   }
 );
 
 export const updateSetting = createAsyncThunk(
-  "setting/updateSetting",
+  'setting/updateSetting',
   async (settingToUpdate, thunkAPI) => {
-    return updateSettingThunk("/setting", settingToUpdate, thunkAPI);
+    return updateSettingThunk('/setting', settingToUpdate, thunkAPI);
   }
 );
 
 const settingSlice = createSlice({
-  name: "setting",
+  name: 'setting',
   initialState,
   reducer: {},
   extraReducers: {
@@ -43,11 +44,15 @@ const settingSlice = createSlice({
       state.isLoading = true;
     },
     [updateSetting.fulfilled]: (state, { payload }) => {
+      const { setting } = payload;
+      state.setting = setting;
       state.isLoading = false;
+      toast.success('Setting updated');
     },
     [updateSetting.rejected]: (state) => {
       state.isLoading = false;
-    }
+      toast.error('Failed to update setting');
+    },
   },
 });
 
