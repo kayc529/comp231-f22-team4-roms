@@ -1,4 +1,5 @@
 import { ADD_TO_CART, DELETE_FROM_CART } from './cartConstants';
+import { toast } from 'react-toastify';
 
 export const addToCart = item => async dispatch => {
     let cart;
@@ -17,14 +18,20 @@ export const addToCart = item => async dispatch => {
 		};
 
 		cart.push(addItem);
-
 		localStorage.setItem('cart', JSON.stringify(cart));
-
-		dispatch({
-			type: ADD_TO_CART,
-			payload: cart,
+	} else {
+		cart.forEach(item => {
+			if (item._id === exitItem[0]._id) {
+				item.count += 1;
+			}
 		});
+		localStorage.setItem('cart', JSON.stringify(cart));
 	}
+	dispatch({
+		type: ADD_TO_CART,
+		payload: cart,
+	});
+	toast("Added to cart!")
 };
 
 export const deleteFromCart = item => async dispatch => {
@@ -43,4 +50,5 @@ export const deleteFromCart = item => async dispatch => {
 		type: DELETE_FROM_CART,
 		payload: deleteItem,
 	});
+	toast("Removed from cart!")
 };

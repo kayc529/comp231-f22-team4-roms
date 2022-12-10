@@ -8,7 +8,6 @@ const StaffEditPage = () =>
     const { isLoading, staff } = useSelector((state) => state.staff);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [message] = useState(''); 
     const [firstname, SetFirstname] = useState('');
     const [lastname, SetLastname] = useState('');
     const [username, SetUsername] = useState('');
@@ -80,18 +79,6 @@ const StaffEditPage = () =>
     if (isLoading) {
       return <div>Loading</div>;
     }
-    
-  function handleMessage()
-    {
-        if(message.length > 0)
-        {
-            return(
-            <div id="messageArea" className="alert alert-danger">
-                {message}
-              </div>
-            );
-        }
-  }
 
   return (
       <div className="container">
@@ -100,9 +87,6 @@ const StaffEditPage = () =>
           <div className="col12" align="center">
             <div className="signup-container">
                 <h1>Edit Staff</h1>
-                
-            {handleMessage()}
-
               <form noValidate className="signup-form" onSubmit ={onEdit}>
                 <div className="form-group">
                   <label>First Name:</label>
