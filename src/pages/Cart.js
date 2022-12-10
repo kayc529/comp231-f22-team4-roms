@@ -56,13 +56,12 @@ const Cart = () => {
     };
     dispatch(addToCart(sampleItem));
   };
-
   const handleMenu = (evt) => {
     navigate('/menu');
   };
 
   const handleCheckout = (evt) => {
-    navigate('/shipping');
+    navigate('/checkout');
   };
 
   const handlePrevious = (evt) => {
@@ -98,7 +97,7 @@ const Cart = () => {
           </div>
           <div className='row p-3'>
             {cart.map((item, index) => (
-              <div className='cartItem'>
+              <div key={index} className='cartItem'>
                 <div className='itemDetails row align-items-center'>
                   <div className='col-2 '>
                     <img

@@ -1,80 +1,122 @@
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { getOrder, deleteOrder } from '../features/order/orderSlice';
 
 const OrderHistoryDetailPage = () => {
-    const ORDERS = [
-        {orderNo: '0001', orderDate:'2022-11-11', orderType:'TAKEAWAY', price: '49.99'},
-        {orderNo: '0002', orderDate:'2022-11-13', orderType:'DINEIN', price: '9.99'},
-        {orderNo: '0003', orderDate:'2022-11-17', orderType:'TAKEAWAY', price: '29.99'},
-        {orderNo: '0004', orderDate:'2022-11-19', orderType:'DINEIN', price: '99.99'},
-        {orderNo: '0005', orderDate:'2022-11-23', orderType:'DINEIN', price: '399.99'},
-        {orderNo: '0006', orderDate:'2022-11-29', orderType:'DINEIN', price: '199.99'}
-      ];
+  const { order } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const params = useParams();
-    let orderDetail = {
-        orderNo: '',
-        orderDate: '',
-        orderType: '',
-        price: ''
-    };
+  const orderType = ['DINE_IN', 'TAKE_OUT'];
+  const orderStatus = ['PENDING', 'ACCEPTED', 'REJECTED', 'COMPLETED', 'CANCELED'];
 
-    ORDERS.map((item, index) => {
-        if(item.orderNo == params.id){
-            orderDetail = item
-            console.log(orderDetail);
-        }
-    });
+  //get order list when the page is loaded
+  useEffect(() => {
+      getOrderData();
+  }, []);
 
-    return (
-      <div className="container">
-        <h1 className='text-center pb-4'>Order History</h1>
-        <div className='d-flex pb-4'>
-            <a href='/order-history' className='btn btn-outline-dark ms-auto me-3'>
-                <i className="bi bi-arrow-return-left"></i> cancel
-            </a>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <div className='table-responsive'>
-              <table className='table'>
-                <tbody>
-                    <tr>
-                        <th width="200">Order No</th>
-                        <td>{orderDetail.orderNo}</td>
-                    </tr>
-                    <tr>
-                        <th>Order Date</th>
-                        <td>{orderDetail.orderDate}</td>
-                    </tr>
-                    <tr>
-                        <th>Order Type</th>
-                        <td>{orderDetail.orderType}</td>
-                    </tr>
-                    <tr>
-                        <th>Food Item</th>
-                        <td>
-                            <div>Item 1</div>
-                            <div>Item 2</div>
-                            <div>Item 3</div>
-                            <div>Item 4</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Total Price</th>
-                        <td>$ {orderDetail.price}</td>
-                    </tr>
-                    <tr>
-                        <th>Remark</th>
-                        <td>Aliquip quis in aute eiusmod. Sint enim officia id fugiat. Mollit irure voluptate veniam aute. Nisi reprehenderit labore ipsum amet esse commodo est veniam ipsum non aliqua aute enim quis. In mollit pariatur reprehenderit minim cillum elit aliqua laboris cillum sint sunt laboris. Ex dolor veniam aliquip mollit quis. Excepteur enim culpa quis ipsum sunt consectetur do. Incididunt culpa adipisicing elit nisi.</td>
-                    </tr>
-                </tbody>
-              </table>
-            </div>
+  const getOrderIdFromUrl = () => {
+    const url = document.URL;
+    const id = url.substring(url.lastIndexOf('/') + 1);
+    return id;
+  };
+
+  const getOrderData = () => {
+    const orderId = getOrderIdFromUrl();
+    dispatch(getOrder(orderId));
+  };
+
+  const onDelete = async (event) => {
+    const orderId = getOrderIdFromUrl();
+    await dispatch(deleteOrder(orderId));
+    navigate('../order-history');
+  };
+
+  const onOrderTypeChanged = () => {
+
+  };
+
+  const onOrderStatusChanged = () => {
+
+  };
+
+  let isLoggedIn = false;
+  return (
+    <div className="container">
+      <h1 className='text-center pb-4'>Order History</h1>
+      <div className='d-flex pb-4'>
+        <a href='/order-history' className='btn btn-outline-dark ms-auto me-3'>
+          <i className="bi bi-arrow-return-left"></i> cancel
+        </a>
+        <button className='btn btn-dark'>Update</button>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <div className='table-responsive'>
+            <table className='table'>
+              <tbody>
+                <tr>
+                  <th width="200">Order No</th>
+                  <td>{order.referenceNumber}</td>
+                </tr>
+                <tr>
+                  <th>Order Date</th>
+                  <td>{order.reserveTime && 'Reserve Time: ' + order.reserveTime}
+                      {order.pickupTime && 'Pickup Time: ' + order.pickupTime}</td>
+                </tr>
+                <tr>
+                  <th width="200">Last update</th>
+                  <td>{order.updatedAt }</td>
+                </tr>
+                <tr>
+                  <th>Order Type</th>
+                  <td>
+                    {orderType.map((orderType, index) => {
+                      return (
+                        <div key={index} className="form-check">
+                          <input className="form-check-input" type="radio" name="orderType" id={"orderType"+index} value={order.orderType} checked={order.orderType === orderType} onChange={onOrderTypeChanged}/>
+                          <label className="form-check-label" htmlFor={"orderType"+index}>{orderType}</label>
+                        </div>
+                      )
+                    })}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Order status</th>
+                  <td>
+                    {orderStatus.map((orderStatus, index) => {
+                      return (
+                        <div key={index} className="form-check">
+                          <input className="form-check-input" type="radio" name="orderStatus" id={"orderStatus"+index} checked={order.status === orderStatus} onChange={onOrderStatusChanged}/>
+                          <label className="form-check-label" htmlFor={"orderStatus"+index}>{orderStatus}</label>
+                        </div>
+                      )
+                    })}</td>
+                </tr>
+                <tr>
+                  <th>Food Item</th>
+                  <td>
+                      <div>Item 1</div>
+                      <div>Item 2</div>
+                      <div>Item 3</div>
+                      <div>Item 4</div>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Total Price</th>
+                  <td>$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className='d-flex'>
+            <button onClick={onDelete} className='ms-auto btn btn-outline-danger'>Delete Order</button>
           </div>
         </div>
       </div>
-    );
-  };
-  
-  export default OrderHistoryDetailPage;
-  
+    </div>
+  );
+};
+
+export default OrderHistoryDetailPage;
