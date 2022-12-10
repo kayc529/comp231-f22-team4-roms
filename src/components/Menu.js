@@ -53,7 +53,7 @@ const Menu = () => {
                     <li><a className="dropdown-item" href="/">Order</a></li>
                     <li><a className="dropdown-item" href="/order-history">Order History</a></li>
                     <li><a className="dropdown-item" href="/staffs">Staff</a></li>
-                    <li><a className="dropdown-item" href="/">Setting</a></li>
+                    <li><a className="dropdown-item" href="/setting">Setting</a></li>
                   </ul>
                 </li>
                 <li className="nav-item">

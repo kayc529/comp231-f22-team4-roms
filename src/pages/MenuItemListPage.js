@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { deleteMenuItem, getAllMenuItems } from '../features/menu/menuSlice';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { deleteMenuItem, getAllMenuItems } from "../features/menu/menuSlice";
 
 const MenuItemListPage = () => {
   const { menuItemList, isLoading } = useSelector((state) => state.menu);
@@ -30,7 +30,7 @@ const MenuItemListPage = () => {
 
   //navigate to add menu page when the add menu item button is clicked
   const onAddMenuItem = () => {
-    navigate('../add-menu-item');
+    navigate("../add-menu-item");
   };
 
   const onUploadMenuItemImage = (menuItemId) => {
@@ -43,44 +43,71 @@ const MenuItemListPage = () => {
   }
 
   return (
-    <div className='container'>
-      <h1 className='text-center'>Menu Items</h1>
-      <div className='d-flex pb-4'>
-        <button onClick={onAddMenuItem} className='btn btn-primary ms-auto'>Add Item</button>
+    <div className="container">
+      <h1 className="text-center">Menu Items</h1>
+      <div className="d-flex pb-4">
+        <button onClick={onAddMenuItem} className="btn btn-primary ms-auto">
+          Add Item
+        </button>
       </div>
-      <div className='table-responsive'>
-        <table className='table table-hover'>
+      <div className="table-responsive">
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>Image</th>
               <th>Name</th>
-              <th className='text-end'>Price</th>
-              <th className='text-center'>Status</th>
-              <th className='text-end'>Action</th>
+              <th className="text-end">Price</th>
+              <th className="text-center">Status</th>
+              <th className="text-end">Action</th>
             </tr>
           </thead>
           <tbody>
-          {menuItemList.map((item, index) => {
-            return (
-              <tr key={item._id}>
-                <td><i class="bi bi-image"></i></td>
-                <td>{item.name}</td>
-                <td className='text-end'>$ {item.price}</td>
-                <td className='text-center'>
-                  { item.isAvailable 
-                    ? <span className="badge rounded-pill bg-success">Active</span>
-                    : <span className="badge rounded-pill bg-danger">Inactive</span>
-                  }
-                  { item.isDineIn && <span className="badge rounded-pill bg-secondary ms-1">Dine in</span>}
-                  { item.isTakeOut && <span className="badge rounded-pill bg-secondary ms-1">Take out</span>}
-                </td>
-                <td className='text-end'>
-                  <button onClick={() => onMenuItemDeleted(item._id)} className='btn btn-sm btn-outline-danger me-1'><i class="bi bi-trash3"></i></button>
-                  <button onClick={() => onMenuItemSelected(item._id)} className='btn btn-sm btn-outline-primary'><i class="bi bi-pencil"></i></button>
-                </td>
-              </tr>
-            );
-          })}
+            {menuItemList.map((item, index) => {
+              return (
+                <tr key={item._id}>
+                  <td>
+                    <i className="bi bi-image"></i>
+                  </td>
+                  <td>{item.name}</td>
+                  <td className="text-end">$ {item.price}</td>
+                  <td className="text-center">
+                    {item.isAvailable ? (
+                      <span className="badge rounded-pill bg-success">
+                        Active
+                      </span>
+                    ) : (
+                      <span className="badge rounded-pill bg-danger">
+                        Inactive
+                      </span>
+                    )}
+                    {item.isDineIn && (
+                      <span className="badge rounded-pill bg-secondary ms-1">
+                        Dine in
+                      </span>
+                    )}
+                    {item.isTakeOut && (
+                      <span className="badge rounded-pill bg-secondary ms-1">
+                        Take out
+                      </span>
+                    )}
+                  </td>
+                  <td className="text-end">
+                    <button
+                      onClick={() => onMenuItemDeleted(item._id)}
+                      className="btn btn-sm btn-outline-danger me-1"
+                    >
+                      <i className="bi bi-trash3"></i>
+                    </button>
+                    <button
+                      onClick={() => onMenuItemSelected(item._id)}
+                      className="btn btn-sm btn-outline-primary"
+                    >
+                      <i className="bi bi-pencil"></i>
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
