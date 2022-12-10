@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { editMenuItem, getMenuItem } from '../features/menu/menuSlice';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { editMenuItem, getMenuItem } from "../features/menu/menuSlice";
 
 const EditMenuItemPage = () => {
   const { isLoading, menuItem } = useSelector((state) => state.menu);
@@ -9,11 +9,13 @@ const EditMenuItemPage = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    _id: '',
-    name: '',
-    desc: '',
-    price: '',
+    _id: "",
+    name: "",
+    desc: "",
+    price: "",
     isAvailable: true,
+    isDineIn: true,
+    isTakeOut: true,
   });
 
   useEffect(() => {
@@ -24,6 +26,8 @@ const EditMenuItemPage = () => {
         desc: menuItem.desc,
         price: menuItem.price,
         isAvailable: menuItem.isAvailable,
+        isDineIn: menuItem.isDineIn,
+        isTakeOut: menuItem.isTakeOut,
       });
     }
   }, [menuItem]);
@@ -31,9 +35,13 @@ const EditMenuItemPage = () => {
   function handleInputChange(event) {
     const name = event.target.name;
     let value =
-      event.target.type === 'checkbox'
+      event.target.type === "checkbox"
         ? event.target.checked
         : event.target.value;
+
+    if (event.target.type === "file") {
+      value = event.target.files[0];
+    }
 
     setFormData((formData) => {
       return {
@@ -41,15 +49,19 @@ const EditMenuItemPage = () => {
         [name]: value,
       };
     });
+
+    
   }
 
   useEffect(() => {
     getMenuItemData();
+
+    console.log(menuItem);
   }, []);
 
   const getMenuItemIdFromUrl = () => {
     const url = document.URL;
-    const id = url.substring(url.lastIndexOf('/') + 1);
+    const id = url.substring(url.lastIndexOf("/") + 1);
     return id;
   };
 
@@ -63,7 +75,7 @@ const EditMenuItemPage = () => {
 
     await dispatch(editMenuItem(formData));
     //can do something after submitted
-    navigate('../menu-items');
+    navigate("../menu-items");
   };
 
   if (isLoading) {
@@ -71,73 +83,141 @@ const EditMenuItemPage = () => {
     return <div>Loading</div>;
   }
 
-  const ORDERTYPE = [{ name: 'DINE_IN' }, { name: 'TAKE_AWAY' }];
+  const ORDERTYPE = [{ name: "DINE_IN" }, { name: "TAKE_AWAY" }];
 
   return (
-    <div className='container'>
-      <h1 className='text-center'>Edit Menu Item</h1>
-      <div className='d-flex pb-4'>
-        <a href="/menu-items" className='btn btn-outline-dark ms-auto me-3'>cancel</a>
-        <button form="form-menu-item" className='btn btn-primary'>Save</button>
+    <div className="container">
+      <h1 className="text-center">Edit Menu Item</h1>
+      <div className="d-flex pb-4">
+        <a href="/menu-items" className="btn btn-outline-dark ms-auto me-3">
+          cancel
+        </a>
+        <button form="form-menu-item" className="btn btn-primary">
+          Save
+        </button>
       </div>
       <form id="form-menu-item" onSubmit={onSubmit}>
         <div className="mb-3 row">
-          <label htmlFor="name" className="col-sm-2 col-form-label">Name</label>
+          <label htmlFor="name" className="col-sm-2 col-form-label">
+            Name
+          </label>
           <div className="col-sm-10">
-            <input id="name" name="name" onChange={handleInputChange} defaultValue={formData.name} type="text" className="form-control"/>
+            <input
+              id="name"
+              name="name"
+              onChange={handleInputChange}
+              defaultValue={formData.name}
+              type="text"
+              className="form-control"
+            />
           </div>
         </div>
-        <div className='mb-3 row'>
-          <label htmlFor='desc' className='col-sm-2 col-form-label'>
+        <div className="mb-3 row">
+          <label htmlFor="desc" className="col-sm-2 col-form-label">
             Description
           </label>
-          <div className='col-sm-10'>
+          <div className="col-sm-10">
             <textarea
-              id='desc'
-              name='desc'
+              id="desc"
+              name="desc"
               onChange={handleInputChange}
               defaultValue={formData.desc}
-              className='form-control'
+              className="form-control"
               rows={5}
             ></textarea>
           </div>
         </div>
         <div className="mb-3 row">
-          <label htmlFor="price" className="col-sm-2 col-form-label">Price</label>
+          <label htmlFor="price" className="col-sm-2 col-form-label">
+            Price
+          </label>
           <div className="col-sm-4">
             <div className="input-group">
-              <span className="input-group-text" id="price">$</span>
-              <input id="price" name='price' onChange={handleInputChange} defaultValue={formData.price} type="text" className="form-control"/>
+              <span className="input-group-text" id="price">
+                $
+              </span>
+              <input
+                id="price"
+                name="price"
+                onChange={handleInputChange}
+                defaultValue={formData.price}
+                type="text"
+                className="form-control"
+              />
             </div>
           </div>
         </div>
         <div className="mb-3 row">
-          <label htmlFor="sortOrder" className="col-sm-2 col-form-label">Sort Order</label>
+          <label htmlFor="sortOrder" className="col-sm-2 col-form-label">
+            Sort Order
+          </label>
           <div className="col-sm-4">
-            <input id="sortOrder" name='sortOrder' onChange={handleInputChange} type="number" className="form-control"/>
+            <input
+              id="sortOrder"
+              name="sortOrder"
+              onChange={handleInputChange}
+              type="number"
+              className="form-control"
+            />
           </div>
         </div>
         <div className="mb-3 row">
           <label className="col-sm-2 col-form-label">Status</label>
           <div className="col-sm-10">
             <div className="form-check form-switch">
-              <input name='isAvailable' type="checkbox" className="form-check-input"
+              <input
+                name="isAvailable"
+                type="checkbox"
+                className="form-check-input"
                 onChange={handleInputChange}
-                defaultChecked={menuItem.isAvailable} autoComplete="off"/>
+                defaultChecked={menuItem.isAvailable}
+                autoComplete="off"
+              />
             </div>
           </div>
         </div>
         <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Category</label>
+          <label className="col-sm-2 col-form-label">Order Type</label>
           <div className="col-sm-4">
-            {ORDERTYPE.map((item, index) => {
-              return (
-                <div key={index} className="form-check">
-                  <input id={"order-type-"+index} defaultValue={"category-"+index} onChange={handleInputChange} name="orderType" className="form-check-input" type="checkbox" />
-                  <label htmlFor={"order-type-"+index} className="form-check-label">{item.name}</label>
-                </div>
-              );
-            })}
+            <div className="form-check">
+              <input
+                id="isDineIn"
+                value="DINE_IN"
+                checked={menuItem.isDineIn}
+                onChange={handleInputChange}
+                name="isDineIn"
+                className="form-check-input"
+                type="checkbox"
+              />
+              <label htmlFor="isDineIn" className="form-check-label">
+                Dine in
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                id="isTakeOut"
+                value="DINE_IN"
+                checked={menuItem.isTakeOut}
+                onChange={handleInputChange}
+                name="isTakeOut"
+                className="form-check-input"
+                type="checkbox"
+              />
+              <label htmlFor="isTakeOut" className="form-check-label">
+                Take out
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="mb-3 row">
+          <label className="col-sm-2 col-form-label">Image</label>
+          <div className="col-sm-4">
+            <div><i className="bi bi-image"></i></div>
+            <input
+              className="form-control"
+              type="file"
+              onChange={handleInputChange}
+            />
           </div>
         </div>
       </form>

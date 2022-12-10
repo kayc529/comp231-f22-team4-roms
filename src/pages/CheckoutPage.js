@@ -6,9 +6,16 @@ const CheckoutPage = ({ order }) => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
-  // order
-  let sampleOrder = {"selectedTime": "2021-12-01 20:13:00", "orderType": "Dine in"}
+  // order type
+  let orderType = "";
+  if (localStorage.getItem('orderType') == 'DINE_IN'){
+    orderType = "Dine in";
+  }else{
+    orderType = "Take out";
+  }
+  let sampleOrder = {"selectedTime": "2021-12-01 20:13:00", "orderType": orderType}
   
+  // Summery
   let cart;
   let subtotal = 0;
   let tax = 0.15;
@@ -51,14 +58,14 @@ const CheckoutPage = ({ order }) => {
                 <tr>
                   <th>Item</th>
                   <th></th>
-                  <th width="200" className='text-center'>Amount</th>
+                  <th width="100" className='text-center'>Unit</th>
                   <th width="100"></th>
                 </tr>
               </thead>
               <tbody>
               {cart.map((item, index) => (
                 <tr key={index} className="col-12">
-                  <td>Image</td>
+                  <td><i class="bi bi-image"></i></td>
                   <td>{item.name}</td>
                   <td className='text-center'>{item.count}</td>
                   <td className='text-end'>$ {item.price}</td>

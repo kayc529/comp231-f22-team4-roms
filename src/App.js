@@ -18,6 +18,7 @@ import OrderHistoryPage from './pages/OrderHistoryPage';
 import OrderHistoryDetailPage from './pages/OrderHistoryDetailPage';
 import StaffsListPage from './pages/StaffsListPage';
 import StaffEditPage from './pages/StaffEditPage';
+import SettingPage from './pages/SettingPage';
 import HomePg from './pages/HomePg';
 import HomePage from './pages/HomePage';
 
@@ -29,8 +30,6 @@ function App() {
           <Route path='/' element={<Menu />}>
             <Route index element={<HomePage />} />
             <Route path='food-item/:id' element={<FoodDetailPage />} />
-            {/*<Route path='/home2' element={<ExampleHomePage2 />} />*/}
-            {/*<Route path='another' element={<ExampleAnotherPage />} />*/}
             <Route path='signin' element={<SignInPage />} />
             <Route path='signup' element={<SignUpPage />} />
             <Route path='signout' element={<SignOutPage />} />
@@ -46,6 +45,7 @@ function App() {
               path='order-history/:id'
               element={<OrderHistoryDetailPage />}
             />
+            <Route path='setting' element={<SettingPage />} />
             <Route path='homepg' element={<HomePg />} />
             <Route
               path='upload-image/:id'
