@@ -8,6 +8,8 @@ import Menu from './components/Menu';
 import FoodDetailPage from './pages/FoodDetailPage';
 import CartPage from './pages/Cart';
 import CheckoutPage from './pages/CheckoutPage';
+import ManageOrderPage from './pages/ManageOrder';
+import ViewOrderPage from './pages/ViewOrder';
 import MenuItemListPage from './pages/MenuItemListPage';
 import AddMenuItemPage from './pages/AddMenuItemPage';
 import EditMenuItemPage from './pages/EditMenuItemPage';
@@ -28,18 +30,21 @@ function App() {
           <Route path='/' element={<Menu />}>
             <Route index element={<HomePage />} />
             <Route path='food-item/:id' element={<FoodDetailPage />} />
-            {/*<Route path='/home2' element={<ExampleHomePage2 />} />*/}
-            {/*<Route path='another' element={<ExampleAnotherPage />} />*/}
             <Route path='signin' element={<SignInPage />} />
             <Route path='signup' element={<SignUpPage />} />
             <Route path='signout' element={<SignOutPage />} />
             <Route path='cart' element={<CartPage />} />
             <Route path='checkout' element={<CheckoutPage />} />
+            <Route path='manageOrder' element={<ManageOrderPage />} />
+            <Route path='viewOrder/:id' element={<ViewOrderPage />} />
             <Route path='menu-items' element={<MenuItemListPage />} />
             <Route path='add-menu-item' element={<AddMenuItemPage />} />
             <Route path='edit-menu-item/:id' element={<EditMenuItemPage />} />
             <Route path='order-history' element={<OrderHistoryPage />} />
-            <Route path='order-history/:id' element={<OrderHistoryDetailPage />} />
+            <Route
+              path='order-history/:id'
+              element={<OrderHistoryDetailPage />}
+            />
             <Route path='setting' element={<SettingPage />} />
             <Route path='homepg' element={<HomePg />} />
             <Route
