@@ -2,11 +2,18 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { uploadMenuItemImage, getMenuItem } from '../features/menu/menuSlice';
+import { getStaffRole } from '../utils/roleHelper';
 
 const UploadMenuItemImagePage = () => {
   const { isLoading, menuItem } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const role = getStaffRole();
+  //only owner and managers can upload menu item image
+  if (role !== 'OWNER' && role !== 'MANAGER') {
+    navigate('/ManageOrder');
+  }
 
   useEffect(() => {
     getMenuItemData();

@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../features/authentication/auth-service';
 import { toast } from 'react-toastify';
+import { getStaffRole } from '../utils/roleHelper';
 
-const AddUserPage = () => {
+const AddStaffPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [firstname, setFirstName] = useState('');
   const [lastname, setLastName] = useState('');
   const [role, setRole] = useState('');
   const navigate = useNavigate();
+
+  const staffRole = getStaffRole();
+  //only owner can add staff
+  if (staffRole !== 'OWNER') {
+    navigate('/ManageOrder');
+  }
 
   useEffect(() => {
     document.title = 'Register';
@@ -173,7 +180,7 @@ const AddUserPage = () => {
                 <input
                   className='btn btn-primary'
                   type='submit'
-                  value='Add User'
+                  value='Add Staff'
                 />
               </div>
             </form>
@@ -184,4 +191,4 @@ const AddUserPage = () => {
   );
 };
 
-export default AddUserPage;
+export default AddStaffPage;
