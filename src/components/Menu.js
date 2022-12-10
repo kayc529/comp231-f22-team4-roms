@@ -41,6 +41,9 @@ const Menu = () => {
                 <li className="nav-item">
                   <a className="nav-link active" href="/">Home</a>
                 </li>
+                <li>
+                  <a className="nav-item nav-link navbar-text" href="/ManageOrder"> Manage Order</a>
+                  </li>
               </ul>
               
               <ul className="navbar-nav ms-auto">
