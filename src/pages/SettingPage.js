@@ -15,7 +15,6 @@ const SettingPage = () => {
 
   useEffect(() => {
     if (setting) {
-      console.log(setting);
       setFormData({
         name: setting.name || '',
         desc: setting.desc || '',
