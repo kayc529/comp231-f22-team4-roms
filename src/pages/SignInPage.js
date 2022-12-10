@@ -1,11 +1,11 @@
 import React, { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../features/authentication/auth-service';
+import { toast } from 'react-toastify';
 
 const SignInPage = () => {
   const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -22,18 +22,6 @@ const SignInPage = () => {
         setPassword(event.target.value);
     }
 
-    function handleMessage()
-    {
-        if(message.length > 0)
-        {
-            return(
-            <div id="messageArea" className="alert alert-danger">
-                {message}
-              </div>
-            );
-        }
-    }
-
     function handleSignIn(event)
     {
         event.preventDefault();
@@ -45,26 +33,20 @@ const SignInPage = () => {
 
         AuthService.login(staff.username, staff.password)
         .then((data) => {
-              console.log("login1")
             if(data.success)
             {
-              console.log("login2")
-
                 navigate("/order");
                 window.location.reload();
+                toast("Login successfully!")
             }
             else
             {
-              console.log("login3")
-
-                setMessage(data.message);
+                toast.error(data.message);
                 clearForm(null);
             }
 
-        }, error => {
-              console.log("login4")
-          
-            setMessage("Server Error!");
+        }, error => {          
+            toast.error("Server Error!");
         });
     }
 
@@ -80,8 +62,6 @@ const SignInPage = () => {
         <div className="col12" align="center">
           <div className="signin-form">    
             <h1>Sign In</h1>
-
-            {handleMessage()}
             
             <form onSubmit= { handleSignIn } id="signinForm" noValidate>
                 <div className="form-group">
