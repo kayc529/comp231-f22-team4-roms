@@ -2,7 +2,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 //import ExampleHomePage from './pages/example/ExampleHomePage';
 import ExampleNotFoundPage from './pages/example/ExampleNotFoundPage';
 import SignInPage from './pages/SignInPage';
-import SignUpPage from './pages/SignUpPage';
+import AddUserPage from './pages/AddUserPage';
 import SignOutPage from './pages/SignOutPage';
 import Menu from './components/Menu';
 import FoodDetailPage from './pages/FoodDetailPage';
@@ -31,7 +31,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path='food-item/:id' element={<FoodDetailPage />} />
             <Route path='signin' element={<SignInPage />} />
-            <Route path='signup' element={<SignUpPage />} />
+            <Route path='add-user' element={<AddUserPage />} />
             <Route path='signout' element={<SignOutPage />} />
             <Route path='cart' element={<CartPage />} />
             <Route path='checkout' element={<CheckoutPage />} />
