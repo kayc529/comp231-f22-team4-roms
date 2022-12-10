@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteMenuItem, getAllMenuItems } from '../features/menu/menuSlice';
+import { getAllMenuItems } from '../features/menu/menuSlice';
 
 import FoodItem from '../components/FoodItem'
 
@@ -17,13 +17,7 @@ const HomePage = () => {
         dispatch(getAllMenuItems());
     };
 
-    const onMenuItemDeleted = async (menuItemId) => {
-        await dispatch(deleteMenuItem(menuItemId));
-        //update the menu item list after an item is deleted
-        getMenuItemList();
-    };
-
-
+    // Demo Data
     const FOODCATERGORY = [
         {name: "CLASSIC BREAKFASTS"},
         {name: "BENNYS"},
@@ -44,19 +38,13 @@ const HomePage = () => {
         </div>
 
         <div className="row">
-          <div className="col-2">
-            {FOODCATERGORY.map((item, index) => {
-                    return <div key={index} className="p-4">{item.name}</div>;
-            })}
-          </div>
-          <div className="col-8">
+          <div className="col-8 mx-auto">
             <div className='row'>
                 {menuItemList.map((item, index) => {
                     return <FoodItem key={index} prop={item} />;
                 })}
             </div>
           </div>
-          <div className="col-2">Cart</div>
         </div>
       </div>
     );
