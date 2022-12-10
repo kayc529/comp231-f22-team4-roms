@@ -15,6 +15,8 @@ const AddMenuItemPage = () => {
     price: "",
     sortOrder: 0,
     isAvailable: true,
+    isDineIn: true,
+    isTakeOut: true
   });
 
   function handleInputChange(event) {
@@ -31,8 +33,6 @@ const AddMenuItemPage = () => {
 
   const onAddMenuItem = async () => {
     let newMenuItem = formData;
-    //object format
-    //{name:'some name', desc:'some dec', price:19.99, isAvailable:true}
     await dispatch(addMenuItem(newMenuItem));
     //can do something after the item is added
     navigate('../menu-items');
@@ -41,19 +41,6 @@ const AddMenuItemPage = () => {
   if (isLoading) {
     //return some UI or whatever
   }
-
-  // Demo Data
-  const FOODCATERGORY = [
-    {name: "CLASSIC BREAKFASTS"},
-    {name: "BENNYS"},
-    {name: "DELUXE BREAKFASTS"},
-    {name: "SIDES"}
-  ]
-
-  const ORDERTYPE = [
-    {name: "Dinein"},
-    {name: "Takeaway"}
-  ]
 
   return (
     <div className='container'>
@@ -101,29 +88,16 @@ const AddMenuItemPage = () => {
           </div>
         </div>
         <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Category</label>
+          <label className="col-sm-2 col-form-label">Order Type</label>
           <div className="col-sm-4">
-            {FOODCATERGORY.map((item, index) => {
-              return (
-                <div key={index} className="form-check">
-                  <input id={"category-"+index} value={"category-"+index} onChange={handleInputChange} name="category" className="form-check-input" type="checkbox" />
-                  <label htmlFor={"category-"+index} className="form-check-label">{item.name}</label>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Category</label>
-          <div className="col-sm-4">
-            {ORDERTYPE.map((item, index) => {
-              return (
-                <div key={index} className="form-check">
-                  <input id={"order-type-"+index} value={"category-"+index} onChange={handleInputChange} name="orderType" className="form-check-input" type="checkbox" />
-                  <label htmlFor={"order-type-"+index} className="form-check-label">{item.name}</label>
-                </div>
-              );
-            })}
+            <div className="form-check">
+              <input id="isDineIn" value="DINE_IN" checked={formData.isDineIn} onChange={handleInputChange} name="isDineIn" className="form-check-input" type="checkbox" />
+              <label htmlFor="isDineIn" className="form-check-label">Dine in</label>
+            </div>
+            <div className="form-check">
+              <input id="isTakeOut" value="DINE_IN" checked={formData.isTakeOut} onChange={handleInputChange} name="isTakeOut" className="form-check-input" type="checkbox" />
+              <label htmlFor="isTakeOut" className="form-check-label">Take out</label>
+            </div>
           </div>
         </div>
       </form>

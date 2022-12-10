@@ -54,31 +54,29 @@ const MenuItemListPage = () => {
             <tr>
               <th>Image</th>
               <th>Name</th>
-              <th>Desc</th>
-              <th>Category</th>
               <th className='text-end'>Price</th>
-              <th className='text-center' width="100">Status</th>
-              <th className='text-end' width="200">Action</th>
+              <th className='text-center'>Status</th>
+              <th className='text-end'>Action</th>
             </tr>
           </thead>
           <tbody>
           {menuItemList.map((item, index) => {
             return (
               <tr key={item._id}>
-                <td></td>
+                <td><i class="bi bi-image"></i></td>
                 <td>{item.name}</td>
-                <td>{item.desc}</td>
-                <td></td>
                 <td className='text-end'>$ {item.price}</td>
                 <td className='text-center'>
                   { item.isAvailable 
                     ? <span className="badge rounded-pill bg-success">Active</span>
                     : <span className="badge rounded-pill bg-danger">Inactive</span>
                   }
+                  { item.isDineIn && <span className="badge rounded-pill bg-secondary ms-1">Dine in</span>}
+                  { item.isTakeOut && <span className="badge rounded-pill bg-secondary ms-1">Take out</span>}
                 </td>
                 <td className='text-end'>
-                  <button onClick={() => onMenuItemDeleted(item._id)} className='btn btn-outline-danger me-3'>Delete</button>
-                  <button onClick={() => onMenuItemSelected(item._id)} className='btn btn-outline-primary'>Edit</button>
+                  <button onClick={() => onMenuItemDeleted(item._id)} className='btn btn-sm btn-outline-danger me-1'><i class="bi bi-trash3"></i></button>
+                  <button onClick={() => onMenuItemSelected(item._id)} className='btn btn-sm btn-outline-primary'><i class="bi bi-pencil"></i></button>
                 </td>
               </tr>
             );

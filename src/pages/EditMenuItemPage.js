@@ -14,6 +14,8 @@ const EditMenuItemPage = () => {
     desc: '',
     price: '',
     isAvailable: true,
+    isDineIn: true,
+    isTakeOut: true
   });
 
   useEffect(() => {
@@ -24,6 +26,8 @@ const EditMenuItemPage = () => {
         desc: menuItem.desc,
         price: menuItem.price,
         isAvailable: menuItem.isAvailable,
+        isDineIn: menuItem.isDineIn,
+        isTakeOut: menuItem.isTakeOut,
       });
     }
   }, [menuItem]);
@@ -45,6 +49,8 @@ const EditMenuItemPage = () => {
 
   useEffect(() => {
     getMenuItemData();
+
+    console.log(menuItem);
   }, []);
 
   const getMenuItemIdFromUrl = () => {
@@ -128,16 +134,16 @@ const EditMenuItemPage = () => {
           </div>
         </div>
         <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Category</label>
+          <label className="col-sm-2 col-form-label">Order Type</label>
           <div className="col-sm-4">
-            {ORDERTYPE.map((item, index) => {
-              return (
-                <div key={index} className="form-check">
-                  <input id={"order-type-"+index} defaultValue={"category-"+index} onChange={handleInputChange} name="orderType" className="form-check-input" type="checkbox" />
-                  <label htmlFor={"order-type-"+index} className="form-check-label">{item.name}</label>
-                </div>
-              );
-            })}
+            <div className="form-check">
+              <input id="isDineIn" value="DINE_IN" checked={menuItem.isDineIn} onChange={handleInputChange} name="isDineIn" className="form-check-input" type="checkbox" />
+              <label htmlFor="isDineIn" className="form-check-label">Dine in</label>
+            </div>
+            <div className="form-check">
+              <input id="isTakeOut" value="DINE_IN" checked={menuItem.isTakeOut} onChange={handleInputChange} name="isTakeOut" className="form-check-input" type="checkbox" />
+              <label htmlFor="isTakeOut" className="form-check-label">Take out</label>
+            </div>
           </div>
         </div>
       </form>
