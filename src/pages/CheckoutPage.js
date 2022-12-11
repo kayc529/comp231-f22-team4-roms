@@ -78,7 +78,13 @@ const CheckoutPage = ({ order }) => {
               <tbody>
               {cart.map((item, index) => (
                 <tr key={index} className="col-12">
-                  <td><i className="bi bi-image"></i></td>
+                  <td className="col-md-2">
+                    <img
+                      className='img-fluid w-100 img-thumbnail'
+                      src={item.imageUrl || '/assets/no_image.png'}
+                      alt={`item: ${item.name}`}
+                    />
+                  </td>
                   <td>{item.name}</td>
                   <td className='text-center'>{item.count}</td>
                   <td className='text-end'>$ {item.price}</td>

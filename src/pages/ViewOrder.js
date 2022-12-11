@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Table} from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../utils/orderFetch';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
@@ -8,6 +8,7 @@ import Card from 'react-bootstrap/Card';
 const ViewOrder = () =>{
 
     let params  = useParams();
+    let navigate = useNavigate();
 
     const [singleOrder, setSingleOrder] = useState({});
     const [orderItem, setOrderItem] = useState([]);
@@ -61,6 +62,9 @@ const ViewOrder = () =>{
         return (qty * price).toFixed(2);
     }
 
+    const handlePrevious = (evt) => {
+        navigate(-1);
+    };
     return (
         <div className='d-grid gap-2' style={{ padding: "15px" }} >
             <Card style={{ width: '100%' }}>
@@ -98,10 +102,17 @@ const ViewOrder = () =>{
                     </tr>     
                 )}
             </tbody>
-        </Table>
+            </Table>
+        <div className='d-flex pb-4'>
+            <button
+            className='btn btn-dark btn-lg btn-block'
+            onClick={handlePrevious}
+            >
+            Cancel
+            </button>
+        </div>
     </div>          
     );
 }
-
 
 export default ViewOrder;

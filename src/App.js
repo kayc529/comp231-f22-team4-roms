@@ -16,6 +16,7 @@ import EditMenuItemPage from './pages/EditMenuItemPage';
 import UploadMenuItemImagePage from './pages/UploadMenuItemImagePage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import OrderHistoryDetailPage from './pages/OrderHistoryDetailPage';
+import LiveOrderPage from './pages/LiveOrderPage';
 import CustomerOrderDetailPage from './pages/CustomerOrderDetailPage';
 import StaffsListPage from './pages/StaffsListPage';
 import StaffEditPage from './pages/StaffEditPage';
@@ -47,6 +48,8 @@ function App() {
               path='order-history/:id'
               element={<OrderHistoryDetailPage />}
             />
+            <Route path='LiveOrder' element={<LiveOrderPage />} />
+
 
             {/* ONLY OWNERS AND MANAGERS CAN VIEW */}
             <Route path='menu-items' element={<MenuItemListPage />} />
