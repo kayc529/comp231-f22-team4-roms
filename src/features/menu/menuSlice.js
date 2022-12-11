@@ -56,10 +56,10 @@ export const deleteMenuItem = createAsyncThunk(
 
 export const uploadMenuItemImage = createAsyncThunk(
   'menu/uploadMenuItemImage',
-  async (menuItemId, imageData, thunkAPI) => {
+  async (data, thunkAPI) => {
     return uploadMenuItemImageThunk(
-      `/menu/upload-image/${menuItemId}`,
-      imageData,
+      `/menu/upload-image/${data.id}`,
+      data.image,
       thunkAPI
     );
   }

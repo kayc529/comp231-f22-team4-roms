@@ -1,9 +1,11 @@
 import { useDispatch } from 'react-redux';
 // import { useNavigate } from 'react-router-dom';
 import { addOrder } from '../features/order/orderSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutPage = ({ order }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const navigate = useNavigate();
 
   // order type
@@ -13,7 +15,8 @@ const CheckoutPage = ({ order }) => {
   }else{
     orderType = "Take out";
   }
-  let sampleOrder = {"selectedTime": "2021-12-01 20:13:00", "orderType": orderType}
+  //let sampleOrder = {"selectedTime": "2021-12-01 20:13:00", "orderType": orderType}
+  let selectedTime = localStorage.getItem('selectedTime');
   
   // Summery
   let cart;
@@ -32,19 +35,29 @@ const CheckoutPage = ({ order }) => {
   }
 
   const onAddOrder = async () => {
-    const pickupTime = new Date('2021-10-13T13:05:45.000Z');
-    const reserveTime = new Date();
-
-    let newOrder = {
-      orderType : 'DINE_IN', 
-      pickupTime : pickupTime.toISOString(),
-      reserveTime : "2021-10-13T13:05:45.000Z",
-      total : total,
-      items : cart
+    let newOrder;
+    if (localStorage.getItem('orderType') == 'DINE_IN') {
+      newOrder = {
+        orderType : 'DINE_IN', 
+        reserveTime : selectedTime,
+        total : total,
+        items : cart
+      }
+    } else {
+      newOrder = {
+        orderType : 'TAKE_OUT', 
+        pickupTime : selectedTime,
+        total : total,
+        items : cart
+      }
     }
-    await dispatch(addOrder(newOrder));
+    
+    let createdOrder = await dispatch(addOrder(newOrder));
+    //console.log(createdOrder)
+    localStorage.removeItem("cart");
+    localStorage.removeItem("selectedTime");
     //can do something after the item is added
-    //navigate('../menu-items');
+    navigate('../order/' + createdOrder.payload.newOrder._id);
   };
 
   return (
@@ -65,7 +78,7 @@ const CheckoutPage = ({ order }) => {
               <tbody>
               {cart.map((item, index) => (
                 <tr key={index} className="col-12">
-                  <td><i class="bi bi-image"></i></td>
+                  <td><i className="bi bi-image"></i></td>
                   <td>{item.name}</td>
                   <td className='text-center'>{item.count}</td>
                   <td className='text-end'>$ {item.price}</td>
@@ -75,8 +88,8 @@ const CheckoutPage = ({ order }) => {
               <tfoot>
                 <tr>
                   <td rowSpan={3} colSpan={2}>
-                    Order Type: {sampleOrder.orderType}<br/>
-                    Select Time: {sampleOrder.selectedTime}
+                    Order Type: {orderType}<br/>
+                    Select Time: {selectedTime}
                   </td>
                   <td className='text-end'>Subtotal : </td>
                   <td className='text-end'>{(Math.round(subtotal * 100) / 100).toFixed(2)}</td>

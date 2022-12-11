@@ -69,4 +69,15 @@ code {
   margin-top: 10px;
 }
 
+.roles-label {
+  margin-left: 4px;
+  margin-right: 12px;
+}
+
+.menu-item-thumbnail {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+}
+
 /*END OF STUFF FOR SIGNIN/SIGNUP PORTIONS*/

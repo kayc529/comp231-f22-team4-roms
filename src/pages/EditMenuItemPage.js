@@ -1,18 +1,29 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { editMenuItem, deleteMenuItem, getMenuItem } from "../features/menu/menuSlice";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+  editMenuItem,
+  deleteMenuItem,
+  getMenuItem,
+} from '../features/menu/menuSlice';
+import { getStaffRole } from '../utils/roleHelper';
 
 const EditMenuItemPage = () => {
   const { isLoading, menuItem } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const role = getStaffRole();
+  //only owner and managers can edit menu item list
+  if (role !== 'OWNER' && role !== 'MANAGER') {
+    navigate('/ManageOrder');
+  }
+
   const [formData, setFormData] = useState({
-    _id: "",
-    name: "",
-    desc: "",
-    price: "",
+    _id: '',
+    name: '',
+    desc: '',
+    price: '',
     isAvailable: true,
     isDineIn: true,
     isTakeOut: true,
@@ -35,11 +46,11 @@ const EditMenuItemPage = () => {
   function handleInputChange(event) {
     const name = event.target.name;
     let value =
-      event.target.type === "checkbox"
+      event.target.type === 'checkbox'
         ? event.target.checked
         : event.target.value;
 
-    if (event.target.type === "file") {
+    if (event.target.type === 'file') {
       value = event.target.files[0];
     }
 
@@ -59,7 +70,7 @@ const EditMenuItemPage = () => {
 
   const getMenuItemIdFromUrl = () => {
     const url = document.URL;
-    const id = url.substring(url.lastIndexOf("/") + 1);
+    const id = url.substring(url.lastIndexOf('/') + 1);
     return id;
   };
 
@@ -73,12 +84,12 @@ const EditMenuItemPage = () => {
 
     await dispatch(editMenuItem(formData));
     //can do something after submitted
-    navigate("../menu-items");
+    navigate('../menu-items');
   };
 
   const onMenuItemDeleted = async (menuItemId) => {
     await dispatch(deleteMenuItem(menuItemId));
-    navigate("../menu-items");
+    navigate('../menu-items');
   };
 
   if (isLoading) {
@@ -86,151 +97,153 @@ const EditMenuItemPage = () => {
     return <div>Loading</div>;
   }
 
-  const ORDERTYPE = [{ name: "DINE_IN" }, { name: "TAKE_AWAY" }];
+  const ORDERTYPE = [{ name: 'DINE_IN' }, { name: 'TAKE_AWAY' }];
 
   return (
-    <div className="container">
-      <h1 className="text-center">Edit Menu Item</h1>
-      <div className="d-flex pb-4">
-        <a href="/menu-items" className="btn btn-outline-dark ms-auto me-3">
+    <div className='container'>
+      <h1 className='text-center'>Edit Menu Item</h1>
+      <div className='d-flex pb-4'>
+        <a href='/menu-items' className='btn btn-outline-dark ms-auto me-3'>
           cancel
         </a>
-        <button form="form-menu-item" className="btn btn-primary">
+        <button form='form-menu-item' className='btn btn-primary'>
           Save
         </button>
       </div>
-      <form id="form-menu-item" onSubmit={onSubmit}>
-        <div className="mb-3 row">
-          <label htmlFor="name" className="col-sm-2 col-form-label">
+      <form id='form-menu-item' onSubmit={onSubmit}>
+        <div className='mb-3 row'>
+          <label htmlFor='name' className='col-sm-2 col-form-label'>
             Name
           </label>
-          <div className="col-sm-10">
+          <div className='col-sm-10'>
             <input
-              id="name"
-              name="name"
+              id='name'
+              name='name'
               onChange={handleInputChange}
               defaultValue={formData.name}
-              type="text"
-              className="form-control"
+              type='text'
+              className='form-control'
             />
           </div>
         </div>
-        <div className="mb-3 row">
-          <label htmlFor="desc" className="col-sm-2 col-form-label">
+        <div className='mb-3 row'>
+          <label htmlFor='desc' className='col-sm-2 col-form-label'>
             Description
           </label>
-          <div className="col-sm-10">
+          <div className='col-sm-10'>
             <textarea
-              id="desc"
-              name="desc"
+              id='desc'
+              name='desc'
               onChange={handleInputChange}
               defaultValue={formData.desc}
-              className="form-control"
+              className='form-control'
               rows={5}
             ></textarea>
           </div>
         </div>
-        <div className="mb-3 row">
-          <label htmlFor="price" className="col-sm-2 col-form-label">
+        <div className='mb-3 row'>
+          <label htmlFor='price' className='col-sm-2 col-form-label'>
             Price
           </label>
-          <div className="col-sm-4">
-            <div className="input-group">
-              <span className="input-group-text" id="price">
+          <div className='col-sm-4'>
+            <div className='input-group'>
+              <span className='input-group-text' id='price'>
                 $
               </span>
               <input
-                id="price"
-                name="price"
+                id='price'
+                name='price'
                 onChange={handleInputChange}
                 defaultValue={formData.price}
-                type="text"
-                className="form-control"
+                type='text'
+                className='form-control'
               />
             </div>
           </div>
         </div>
-        <div className="mb-3 row">
-          <label htmlFor="sortOrder" className="col-sm-2 col-form-label">
+        <div className='mb-3 row'>
+          <label htmlFor='sortOrder' className='col-sm-2 col-form-label'>
             Sort Order
           </label>
-          <div className="col-sm-4">
+          <div className='col-sm-4'>
             <input
-              id="sortOrder"
-              name="sortOrder"
+              id='sortOrder'
+              name='sortOrder'
               onChange={handleInputChange}
-              type="number"
-              className="form-control"
+              type='number'
+              className='form-control'
             />
           </div>
         </div>
-        <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Status</label>
-          <div className="col-sm-10">
-            <div className="form-check form-switch">
+        <div className='mb-3 row'>
+          <label className='col-sm-2 col-form-label'>Status</label>
+          <div className='col-sm-10'>
+            <div className='form-check form-switch'>
               <input
-                name="isAvailable"
-                type="checkbox"
-                className="form-check-input"
+                name='isAvailable'
+                type='checkbox'
+                className='form-check-input'
                 onChange={handleInputChange}
                 defaultChecked={menuItem.isAvailable}
-                autoComplete="off"
+                autoComplete='off'
               />
             </div>
           </div>
         </div>
-        <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Order Type</label>
-          <div className="col-sm-4">
-            <div className="form-check">
+        <div className='mb-3 row'>
+          <label className='col-sm-2 col-form-label'>Order Type</label>
+          <div className='col-sm-4'>
+            <div className='form-check'>
               <input
-                id="isDineIn"
-                value="DINE_IN"
+                id='isDineIn'
+                value='DINE_IN'
                 checked={menuItem.isDineIn}
                 onChange={handleInputChange}
-                name="isDineIn"
-                className="form-check-input"
-                type="checkbox"
+                name='isDineIn'
+                className='form-check-input'
+                type='checkbox'
               />
-              <label htmlFor="isDineIn" className="form-check-label">
+              <label htmlFor='isDineIn' className='form-check-label'>
                 Dine in
               </label>
             </div>
-            <div className="form-check">
+            <div className='form-check'>
               <input
-                id="isTakeOut"
-                value="DINE_IN"
+                id='isTakeOut'
+                value='DINE_IN'
                 checked={menuItem.isTakeOut}
                 onChange={handleInputChange}
-                name="isTakeOut"
-                className="form-check-input"
-                type="checkbox"
+                name='isTakeOut'
+                className='form-check-input'
+                type='checkbox'
               />
-              <label htmlFor="isTakeOut" className="form-check-label">
+              <label htmlFor='isTakeOut' className='form-check-label'>
                 Take out
               </label>
             </div>
           </div>
         </div>
-        <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Image</label>
-          <div className="col-sm-4">
-            <div><i className="bi bi-image"></i></div>
+        <div className='mb-3 row'>
+          <label className='col-sm-2 col-form-label'>Image</label>
+          <div className='col-sm-4'>
+            <div>
+              <i className='bi bi-image'></i>
+            </div>
             <input
-              className="form-control"
-              type="file"
+              className='form-control'
+              type='file'
               onChange={handleInputChange}
             />
           </div>
         </div>
-        <div className="mb-3 row">
-          <label className="col-sm-2 col-form-label">Delete</label>
-          <div className="col-sm-4">
+        <div className='mb-3 row'>
+          <label className='col-sm-2 col-form-label'>Delete</label>
+          <div className='col-sm-4'>
             <button
-                onClick={() => onMenuItemDeleted(getMenuItemIdFromUrl())}
-                className="btn btn-sm btn-outline-danger me-1"
-              >
-                <i className="bi bi-trash3"></i>
+              onClick={() => onMenuItemDeleted(getMenuItemIdFromUrl())}
+              className='btn btn-sm btn-outline-danger me-1'
+            >
+              <i className='bi bi-trash3'></i>
             </button>
           </div>
         </div>
