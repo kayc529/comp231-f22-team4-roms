@@ -16,6 +16,7 @@ import EditMenuItemPage from './pages/EditMenuItemPage';
 import UploadMenuItemImagePage from './pages/UploadMenuItemImagePage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import OrderHistoryDetailPage from './pages/OrderHistoryDetailPage';
+import CustomerOrderDetailPage from './pages/CustomerOrderDetailPage';
 import StaffsListPage from './pages/StaffsListPage';
 import StaffEditPage from './pages/StaffEditPage';
 import SettingPage from './pages/SettingPage';
@@ -71,6 +72,7 @@ function App() {
             <Route path='checkout' element={<CheckoutPage />} />
             <Route path='food-item/:id' element={<FoodDetailPage />} />
             <Route path='homepg' element={<HomePg />} />
+            <Route path='order/:id' element={<CustomerOrderDetailPage />} />
             {/* add page here if you want the shared layout*/}
           </Route>
 

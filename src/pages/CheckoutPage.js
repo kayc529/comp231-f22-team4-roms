@@ -1,9 +1,11 @@
 import { useDispatch } from 'react-redux';
 // import { useNavigate } from 'react-router-dom';
 import { addOrder } from '../features/order/orderSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutPage = ({ order }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const navigate = useNavigate();
 
   // order type
@@ -50,11 +52,12 @@ const CheckoutPage = ({ order }) => {
       }
     }
     
-    await dispatch(addOrder(newOrder));
+    let createdOrder = await dispatch(addOrder(newOrder));
+    //console.log(createdOrder)
     localStorage.removeItem("cart");
     localStorage.removeItem("selectedTime");
     //can do something after the item is added
-    //navigate('../menu-items');
+    navigate('../order/' + createdOrder.payload.newOrder._id);
   };
 
   return (
