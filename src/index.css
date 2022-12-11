@@ -74,4 +74,17 @@ code {
   margin-right: 12px;
 }
 
+.menu-item-thumbnail {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+}
+
+.menu-item-img {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  margin: 8px
+}
+
 /*END OF STUFF FOR SIGNIN/SIGNUP PORTIONS*/

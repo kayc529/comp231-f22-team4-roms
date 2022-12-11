@@ -52,7 +52,7 @@ export const deleteMenuItemThunk = async (url, thunkAPI) => {
 
 export const uploadMenuItemImageThunk = async (url, imageData, thunkAPI) => {
   try {
-    const res = await customFetch.post(url, imageData);
+    const res = await customFetch.post(url, { image: imageData });
     console.log(res.data);
     return res.data;
   } catch (error) {

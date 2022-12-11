@@ -24,12 +24,6 @@ const MenuItemListPage = () => {
     dispatch(getAllMenuItems());
   };
 
-  const onMenuItemDeleted = async (menuItemId) => {
-    await dispatch(deleteMenuItem(menuItemId));
-    //update the menu item list after an item is deleted
-    getMenuItemList();
-  };
-
   //navigate to edit menu page when an menu item is clicked
   const onMenuItemSelected = (menuItemId) => {
     navigate(`../edit-menu-item/${menuItemId}`);
@@ -73,7 +67,11 @@ const MenuItemListPage = () => {
               return (
                 <tr key={item._id}>
                   <td>
-                    <i className='bi bi-image'></i>
+                    <img
+                      src={item.imageUrl || '/assets/no_image.png'}
+                      alt={item.name}
+                      className='menu-item-thumbnail'
+                    />
                   </td>
                   <td>{item.name}</td>
                   <td className='text-end'>$ {item.price}</td>
@@ -100,10 +98,10 @@ const MenuItemListPage = () => {
                   </td>
                   <td className='text-end'>
                     <button
-                      onClick={() => onMenuItemDeleted(item._id)}
-                      className='btn btn-sm btn-outline-danger me-1'
+                      onClick={() => onUploadMenuItemImage(item._id)}
+                      className='btn btn-sm btn-outline-primary me-1'
                     >
-                      <i className='bi bi-trash3'></i>
+                      <i className='bi bi-image'></i>
                     </button>
                     <button
                       onClick={() => onMenuItemSelected(item._id)}

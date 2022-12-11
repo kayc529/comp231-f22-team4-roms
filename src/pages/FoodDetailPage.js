@@ -28,18 +28,33 @@ const FoodDetailPage = () => {
   };
 
   return (
-    <div className="container pt-5">
-      <div className="card">
-        <div className="row">
-          <div className="col-8">
-            This is an image
+    <div className='container pt-5'>
+      <div className='card'>
+        <div className='row'>
+          <div className='col-8'>
+            <img
+              src={menuItem.imageUrl || '/assets/no_image.png'}
+              alt={menuItem.name}
+              className='menu-item-img'
+            />
           </div>
-          <div className="col-4 p-4">
-            <div className="pb-3 d-flex"><a className="btn btn-outline-dark ms-auto" href="/"><i className="bi bi-arrow-return-left"></i> cancel</a></div>
+          <div className='col-4 p-4'>
+            <div className='pb-3 d-flex'>
+              <a className='btn btn-outline-dark ms-auto' href='/'>
+                <i className='bi bi-arrow-return-left'></i> cancel
+              </a>
+            </div>
             <h2>{menuItem.name}</h2>
-            <div className="pb-3">{menuItem.desc}</div>
-            <div className="pb-3">$ {menuItem.price}</div>
-            <div className="pb-3"><button onClick={addMenuItemToCart} className="btn btn-outline-dark"><i className="bi bi-plus"></i> Add to Order</button></div>
+            <div className='pb-3'>{menuItem.desc}</div>
+            <div className='pb-3'>$ {menuItem.price}</div>
+            <div className='pb-3'>
+              <button
+                onClick={addMenuItemToCart}
+                className='btn btn-outline-dark'
+              >
+                <i className='bi bi-plus'></i> Add to Cart
+              </button>
+            </div>
           </div>
         </div>
       </div>
