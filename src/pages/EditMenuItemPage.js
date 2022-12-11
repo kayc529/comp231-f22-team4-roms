@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { editMenuItem, getMenuItem } from "../features/menu/menuSlice";
+import { editMenuItem, deleteMenuItem, getMenuItem } from "../features/menu/menuSlice";
 
 const EditMenuItemPage = () => {
   const { isLoading, menuItem } = useSelector((state) => state.menu);
@@ -49,8 +49,6 @@ const EditMenuItemPage = () => {
         [name]: value,
       };
     });
-
-    
   }
 
   useEffect(() => {
@@ -75,6 +73,11 @@ const EditMenuItemPage = () => {
 
     await dispatch(editMenuItem(formData));
     //can do something after submitted
+    navigate("../menu-items");
+  };
+
+  const onMenuItemDeleted = async (menuItemId) => {
+    await dispatch(deleteMenuItem(menuItemId));
     navigate("../menu-items");
   };
 
@@ -218,6 +221,17 @@ const EditMenuItemPage = () => {
               type="file"
               onChange={handleInputChange}
             />
+          </div>
+        </div>
+        <div className="mb-3 row">
+          <label className="col-sm-2 col-form-label">Delete</label>
+          <div className="col-sm-4">
+            <button
+                onClick={() => onMenuItemDeleted(getMenuItemIdFromUrl())}
+                className="btn btn-sm btn-outline-danger me-1"
+              >
+                <i className="bi bi-trash3"></i>
+            </button>
           </div>
         </div>
       </form>
