@@ -16,8 +16,7 @@ const Menu = () => {
     {
 
       return(
-        <li><a className="dropdown-item" href="/signup">Sign Up</a>
-          <a className="dropdown-item" href="/signout">Sign Out</a></li>
+        <li><a className="dropdown-item" href="/signout">Sign Out</a></li>
       );
       
     }
@@ -43,7 +42,10 @@ const Menu = () => {
                 </li>
                 <li>
                   <a className="nav-item nav-link navbar-text" href="/ManageOrder"> Manage Order</a>
-                  </li>
+                </li>
+                <li>
+                  <a className="nav-item nav-link navbar-text" href="/LiveOrder"> Live Order</a>
+                </li>
               </ul>
               
               <ul className="navbar-nav ms-auto">

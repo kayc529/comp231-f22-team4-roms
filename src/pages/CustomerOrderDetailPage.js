@@ -23,13 +23,8 @@ const CustomerOrderDetailPage = () => {
 
   //get order list when the page is loaded
   useEffect(() => {
-    getOrderData();
-    
-  }, []);
-
-  const getOrderData = () => {
     dispatch(getOrder(id));
-  };
+  }, []);
 
   const handleHome = evt => {
     navigate('/');
