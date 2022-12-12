@@ -66,8 +66,9 @@ const ViewOrder = () =>{
         navigate(-1);
     };
     return (
-        <div className='d-grid gap-2' style={{ padding: "15px" }} >
-            <Card style={{ width: '100%' }}>
+        <div className='container'>
+            <h2 className='text-center mt-5'>Order Detail</h2>
+            <Card>
                 <Card.Body>
                     <Card.Title>Reference Number: {singleOrder.referenceNumber}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Status: {orderStatus}</Card.Subtitle>
@@ -83,36 +84,39 @@ const ViewOrder = () =>{
                     <Card.Text> Total: $ {total} </Card.Text>
                 </Card.Body>
             </Card>         
-            
-        <Table striped bordered hover variant="light">
-            <thead>
-                <tr>
-                    <th>Food item</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                 </tr>
-            </thead>
-                
-            <tbody>   
-                {orderItem.map((item, index) =>
-                    <tr key={index}> 
-                        <td> {item.menuItem.name} </td>
-                        <td>{item.quantity} </td>
-                        <td >$ {onSubTotal(item.quantity, item.menuItem.price)} </td> 
-                    </tr>     
-                )}
-            </tbody>
-            </Table>
-        <div className='d-flex pb-4'>
-            <button
-            className='btn btn-dark btn-lg btn-block'
-            onClick={handlePrevious}
-            >
-            Cancel
-            </button>
-        </div>
-    </div>          
+            <div className='card mt-3'>
+                <div className='card-body'>
+                    <div className='table-responsive'>
+                        <Table striped bordered hover variant="light">
+                            <thead>
+                                <tr>
+                                    <th>Food item</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>   
+                            {orderItem.map((item, index) =>
+                                <tr key={index}> 
+                                    <td> {item.menuItem.name} </td>
+                                    <td>{item.quantity} </td>
+                                    <td >$ {onSubTotal(item.quantity, item.menuItem.price)} </td> 
+                                </tr>     
+                            )}
+                            </tbody>
+                        </Table>
+                    </div>
+                </div>
+            </div>
+            <div className='pt-4 text-end'>
+                <button
+                className='btn btn-outline-primary btn-block'
+                onClick={handlePrevious}
+                >
+                <i class="bi bi-arrow-return-left"></i> Return
+                </button>
+            </div>
+        </div>  
     );
 }
-
 export default ViewOrder;
