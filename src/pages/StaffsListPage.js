@@ -50,6 +50,7 @@ const StaffsListPage = () => {
 
   return (
     <div className='container'>
+      <h2 className="text-center pt-5">Staff</h2>
       <div className='row'>
         <div className='d-flex pb-4'>
           <button
@@ -59,73 +60,77 @@ const StaffsListPage = () => {
             <i className='bi bi-plus-lg'></i> Add Staff
           </button>
         </div>
-        <div className='col table-responsive'>
-          <table
-            id='contactList'
-            className='table table-dark table-hover table-striped table-bordered'
-          >
-            <thead>
-              <tr>
-                <th scope='col' className='text-center'>
-                  #
-                </th>
-                <th className='text-center align-middle' scope='col'>
-                  Role
-                </th>
-                <th className='text-center align-middle' scope='col'>
-                  First Name
-                </th>
-                <th className='text-center align-middle' scope='col'>
-                  Last Name
-                </th>
-                <th className='text-center align-middle' scope='col'>
-                  Username
-                </th>
-                <th className='text-center align-middle' scope='col'>
-                  Edit Staff
-                </th>
-                <th className='text-center align-middle' scope='col'>
-                  Delete Staff
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {staffsList &&
-                staffsList.map((staff, index) => {
-                  return (
-                    <tr key={staff._id}>
-                      <th scope='row' className='text-center'>
-                        {index + 1}
-                      </th>
-                      <td className='text-center'>{staff.role}</td>
-                      <td className='text-center'>{staff.firstname}</td>
-                      <td className='text-center'>{staff.lastname}</td>
-                      <td className='text-center'>{staff.username}</td>
-                      <td className='text-center'>
-                        <button
-                          onClick={() => {
-                            onStaffSelected(staff._id);
-                          }}
-                          className='btn btn-primary btn-sm edit'
-                        >
-                          <i className='fa-solid fa-pen-to-square'></i> Edit
-                        </button>
-                      </td>
-                      <td className='text-center'>
-                        <button
-                          onClick={() => {
-                            confirmDelete(staff._id);
-                          }}
-                          className='btn btn-danger btn-sm delete'
-                        >
-                          <i className='fa-solid fa-trash-can'></i> Delete
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+      </div>
+      <div className='card'>
+        <div className='card-body'>
+          <div className='table-responsive'>
+            <table
+              id='contactList'
+              className='table table-hover table-striped'
+            >
+              <thead>
+                <tr>
+                  <th className='text-center'>
+                    #
+                  </th>
+                  <th className='text-center align-middle'>
+                    Role
+                  </th>
+                  <th className='text-center align-middle'>
+                    First Name
+                  </th>
+                  <th className='text-center align-middle'>
+                    Last Name
+                  </th>
+                  <th className='text-center align-middle'>
+                    Username
+                  </th>
+                  <th className='text-center align-middle'>
+                    Edit
+                  </th>
+                  <th className='text-center align-middle'>
+                    Delete
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {staffsList &&
+                  staffsList.map((staff, index) => {
+                    return (
+                      <tr key={staff._id}>
+                        <th scope='row' className='text-center'>
+                          {index + 1}
+                        </th>
+                        <td className='text-center'>{staff.role}</td>
+                        <td className='text-center'>{staff.firstname}</td>
+                        <td className='text-center'>{staff.lastname}</td>
+                        <td className='text-center'>{staff.username}</td>
+                        <td className='text-center'>
+                          <button
+                            onClick={() => {
+                              onStaffSelected(staff._id);
+                            }}
+                            className='btn btn-primary btn-sm edit'
+                          >
+                            <i className="bi bi-pen"></i> Edit
+                          </button>
+                        </td>
+                        <td className='text-center'>
+                          <button
+                            onClick={() => {
+                              confirmDelete(staff._id);
+                            }}
+                            className='btn btn-outline-danger btn-sm delete'
+                          >
+                            <i className="bi bi-trash3"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

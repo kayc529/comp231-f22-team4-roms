@@ -32,9 +32,9 @@ const CustomerOrderDetailPage = () => {
   
   return (
     <div className="container">
-      <h1 className='text-center pb-4'>Order Detail</h1>
-      <div className="row">
-        <div className="col-12">
+      <h1 className='mt-5'>Order Detail</h1>
+      <div className="card">
+        <div className="card-body">
           <div className='table-responsive'>
             <table className='table'>
               <tbody>
@@ -90,13 +90,13 @@ const CustomerOrderDetailPage = () => {
         </div>
       </div>
       <div className="row p-3">
-              <div className="col text-center">
-                  <button className='btn btn-dark btn-lg'
-                      onClick={handleHome}>
-                      Back to Home
-                  </button>
-              </div>
-          </div>
+        <div className="col text-center">
+            <button className='btn btn-dark btn-lg'
+                onClick={handleHome}>
+                Back to Home
+            </button>
+        </div>
+      </div>
     </div>
   );
 };

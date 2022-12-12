@@ -89,104 +89,98 @@ const AddStaffPage = () => {
 
   return (
     <div className='container'>
-      <div className='row'>
-        <div className='col12' align='center'>
-          <div className='signup-container'>
-            <h1>Add New Staff</h1>
-            <form noValidate className='signup-form' onSubmit={handleSignUp}>
-              <div className='form-group'>
-                <label>First Name:</label>
-                <input
-                  className='form-control'
-                  type='text'
-                  name='firstname'
-                  id='firstname'
-                  value={firstname}
-                  onChange={onChangeFirstName}
-                  placeholder='First Name'
-                  required
-                />
+      <h2 className='text-center mt-5'>Add New Staff</h2>
+      <form noValidate className='signup-form' onSubmit={handleSignUp}>
+      <div className='form-group text-end pb-3' onChange={onChangeRole}>
+        <a href="/staffs" className='btn btn-outline-primary me-2'>Cancel</a>
+        <input
+          className='btn btn-primary'
+          type='submit'
+          value='Add Staff'
+        />
+      </div>
+      <div className='card'>
+        <div className='card-body' onChange={onChangeRole}>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">First Name</label>
+            <div className="col-sm-10">
+              <input
+                className='form-control'
+                type='text'
+                name='firstname'
+                id='firstname'
+                value={firstname}
+                onChange={onChangeFirstName}
+                required
+              />
+            </div>
+          </div>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">Last Name</label>
+            <div className="col-sm-10">
+              <input
+                className='form-control'
+                type='text'
+                name='lastname'
+                id='lastname'
+                value={lastname}
+                onChange={onChangeLastName}
+                required
+              />
+            </div>
+          </div>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">Username</label>
+            <div className="col-sm-10">
+              <input
+                type='text'
+                className='form-control'
+                id='username'
+                name='username'
+                required
+                value={username}
+                onChange={onChangeUsername}
+              />
+            </div>
+          </div>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">Password</label>
+            <div className="col-sm-10">
+              <input
+                type='password'
+                className='form-control'
+                id='password'
+                name='password'
+                required
+                value={password}
+                onChange={onChangePassword}
+              />
+            </div>
+          </div>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">Staff Type</label>
+            <div className="col-sm-10">
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="role" id="server" value="SERVER"/>
+                <label className="form-check-label" htmlFor="server">Server</label>
               </div>
-              <div className='form-group'>
-                <label>Last Name:</label>
-                <input
-                  className='form-control'
-                  type='text'
-                  name='lastname'
-                  id='lastname'
-                  value={lastname}
-                  onChange={onChangeLastName}
-                  placeholder='Last Name'
-                  required
-                />
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="role" id="chef" value="CHEF"/>
+                <label className="form-check-label" htmlFor="chef">Chef</label>
               </div>
-              <div className='form-group'>
-                <label>Username:</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  id='username'
-                  name='username'
-                  required
-                  value={username}
-                  onChange={onChangeUsername}
-                  placeholder='Username'
-                />
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="role" id="manager" value="MANAGER"/>
+                <label className="form-check-label" htmlFor="manager">Manager</label>
               </div>
-              <div className='form-group'>
-                <label>Password:</label>
-                <input
-                  type='password'
-                  className='form-control'
-                  id='password'
-                  name='password'
-                  required
-                  value={password}
-                  onChange={onChangePassword}
-                  placeholder='Password'
-                />
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="role" id="owner" value="OWNER"/>
+                <label className="form-check-label" htmlFor="owner">Owner</label>
               </div>
-
-              <div className='form-group' onChange={onChangeRole}>
-                <label>Type of User</label>
-                <br />
-                <fieldset id='roles'>
-                  <input type='radio' name='role' value='SERVER' id='server' />
-                  <label for='server' className='roles-label'>
-                    Server
-                  </label>
-                  <input type='radio' name='role' value='CHEF' id='chef' />
-                  <label for='chef' className='roles-label'>
-                    Chef
-                  </label>
-                  <input
-                    type='radio'
-                    name='role'
-                    value='MANAGER'
-                    id='manager'
-                  />
-                  <label for='manager' className='roles-label'>
-                    Manager
-                  </label>
-                  <input type='radio' name='role' value='OWNER' id='owner' />
-                  <label for='owner' className='roles-label'>
-                    Owner
-                  </label>
-                </fieldset>
-              </div>
-              <br />
-
-              <div>
-                <input
-                  className='btn btn-primary'
-                  type='submit'
-                  value='Add Staff'
-                />
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
+      </form>
     </div>
   );
 };

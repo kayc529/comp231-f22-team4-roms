@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllMenuItems } from "../features/menu/menuSlice";
+import { getSetting } from "../features/setting/settingSlice";
 
 import FoodItem from "../components/FoodItem";
 
 const HomePage = () => {
   const { menuItemList } = useSelector((state) => state.menu);
+  const { setting } = useSelector((state) => state.setting);
   const dispatch = useDispatch();
   const orderTypeList = ["Dine in", "Take out"];
 
@@ -18,6 +20,7 @@ const HomePage = () => {
   //get menu list when the page is loaded
   useEffect(() => {
     getMenuItemList();
+    dispatch(getSetting());
   }, []);
 
   const getMenuItemList = () => {
@@ -34,20 +37,19 @@ const HomePage = () => {
 
   return (
     <div className="container-fluid">
-      <h1 className="text-center py-4">Restaurant Name</h1>
-      <div className="text-center pb-4">
-        Adipisicing amet amet culpa cillum esse aliquip cupidatat. Ex commodo
-        laborum quis ut. Est nulla nisi laborum cupidatat.
-      </div>
-      <div className="text-center pb-4">
+      <div className="p-3 text-center"><img src="/assets/logo.png" width={250} alt={setting.name}/></div>
+      <div className="text-center h4">{setting.desc}</div>
+      <div className="text-center">{setting.openHour}</div>
+
+      <div className="text-center p-4">
         <div className="btn-group" role="group" aria-label="Basic example">
           <button
             onClick={() => filter("DINE_IN")}
             type="button"
             className={
               localStorage.getItem("orderType") === "DINE_IN"
-                ? "btn btn-dark"
-                : "btn btn-outline-dark"
+                ? "btn btn-primary"
+                : "btn btn-outline-primary"
             }
           >
             Dine in
@@ -57,8 +59,8 @@ const HomePage = () => {
             type="button"
             className={
               localStorage.getItem("orderType") === "TAKE_OUT"
-                ? "btn btn-dark"
-                : "btn btn-outline-dark"
+                ? "btn btn-primary"
+                : "btn btn-outline-primary"
             }
           >
             Take out

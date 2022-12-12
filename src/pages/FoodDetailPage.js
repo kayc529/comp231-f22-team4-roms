@@ -32,11 +32,14 @@ const FoodDetailPage = () => {
       <div className='card'>
         <div className='row'>
           <div className='col-8'>
-            <img
-              src={menuItem.imageUrl || '/assets/no_image.png'}
-              alt={menuItem.name}
-              className='menu-item-img'
-            />
+            <div className='p-5'>
+              <img
+                src={menuItem.imageUrl || '/assets/no_image.png'}
+                alt={menuItem.name}
+                className='img-fluid'
+              />
+            </div>
+
           </div>
           <div className='col-4 p-4'>
             <div className='pb-3 d-flex'>
@@ -46,13 +49,13 @@ const FoodDetailPage = () => {
             </div>
             <h2>{menuItem.name}</h2>
             <div className='pb-3'>{menuItem.desc}</div>
-            <div className='pb-3'>$ {menuItem.price}</div>
+            <div className='pb-3 h4'>$ {menuItem.price}</div>
             <div className='pb-3'>
               <button
                 onClick={addMenuItemToCart}
-                className='btn btn-outline-dark'
+                className='btn btn-primary'
               >
-                <i className='bi bi-plus'></i> Add to Cart
+                <i className='bi bi-plus'></i> Add to Order
               </button>
             </div>
           </div>

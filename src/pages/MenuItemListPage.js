@@ -45,76 +45,80 @@ const MenuItemListPage = () => {
 
   return (
     <div className='container'>
-      <h1 className='text-center'>Menu Items</h1>
+      <h2 className='text-center mt-5'>Menu Items</h2>
       <div className='d-flex pb-4'>
         <button onClick={onAddMenuItem} className='btn btn-primary ms-auto'>
           Add Item
         </button>
       </div>
-      <div className='table-responsive'>
-        <table className='table table-hover'>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th className='text-end'>Price</th>
-              <th className='text-center'>Status</th>
-              <th className='text-end'>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {menuItemList.map((item, index) => {
-              return (
-                <tr key={item._id}>
-                  <td>
-                    <img
-                      src={item.imageUrl || '/assets/no_image.png'}
-                      alt={item.name}
-                      className='menu-item-thumbnail'
-                    />
-                  </td>
-                  <td>{item.name}</td>
-                  <td className='text-end'>$ {item.price}</td>
-                  <td className='text-center'>
-                    {item.isAvailable ? (
-                      <span className='badge rounded-pill bg-success'>
-                        Active
-                      </span>
-                    ) : (
-                      <span className='badge rounded-pill bg-danger'>
-                        Inactive
-                      </span>
-                    )}
-                    {item.isDineIn && (
-                      <span className='badge rounded-pill bg-secondary ms-1'>
-                        Dine in
-                      </span>
-                    )}
-                    {item.isTakeOut && (
-                      <span className='badge rounded-pill bg-secondary ms-1'>
-                        Take out
-                      </span>
-                    )}
-                  </td>
-                  <td className='text-end'>
-                    <button
-                      onClick={() => onUploadMenuItemImage(item._id)}
-                      className='btn btn-sm btn-outline-primary me-1'
-                    >
-                      <i className='bi bi-image'></i>
-                    </button>
-                    <button
-                      onClick={() => onMenuItemSelected(item._id)}
-                      className='btn btn-sm btn-outline-primary'
-                    >
-                      <i className='bi bi-pencil'></i>
-                    </button>
-                  </td>
+      <div className='card'>
+        <div className='card-body'>
+          <div className='table-responsive'>
+            <table className='table table-hover'>
+              <thead>
+                <tr>
+                  <th width="100">Image</th>
+                  <th>Name</th>
+                  <th className='text-end'>Price</th>
+                  <th className='text-center'>Status</th>
+                  <th className='text-end'>Action</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {menuItemList.map((item, index) => {
+                  return (
+                    <tr key={item._id}>
+                      <td>
+                        <img
+                          src={item.imageUrl || '/assets/no_image.png'}
+                          alt={item.name}
+                          className='img-fluid'
+                        />
+                      </td>
+                      <td>{item.name}</td>
+                      <td className='text-end'>$ {item.price}</td>
+                      <td className='text-center'>
+                        {item.isAvailable ? (
+                          <span className='badge rounded-pill bg-success'>
+                            Active
+                          </span>
+                        ) : (
+                          <span className='badge rounded-pill bg-danger'>
+                            Inactive
+                          </span>
+                        )}
+                        {item.isDineIn && (
+                          <span className='badge rounded-pill bg-secondary ms-1'>
+                            Dine in
+                          </span>
+                        )}
+                        {item.isTakeOut && (
+                          <span className='badge rounded-pill bg-secondary ms-1'>
+                            Take out
+                          </span>
+                        )}
+                      </td>
+                      <td className='text-end'>
+                        <button
+                          onClick={() => onUploadMenuItemImage(item._id)}
+                          className='btn btn-sm btn-outline-primary me-1'
+                        >
+                          <i className='bi bi-image'></i>
+                        </button>
+                        <button
+                          onClick={() => onMenuItemSelected(item._id)}
+                          className='btn btn-sm btn-outline-primary'
+                        >
+                          <i className='bi bi-pencil'></i>
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );

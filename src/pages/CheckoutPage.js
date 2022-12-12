@@ -62,17 +62,17 @@ const CheckoutPage = ({ order }) => {
 
   return (
     <div className="container">
-      <div className="row pt-5">
-        <h1>Checkout</h1>
-        <div className="col-12">
+      <h2 className='mt-5'>Checkout</h2>
+      <div className='card'>
+        <div className='card-body'>
           <div className="table-responsive">
             <table className="table">
               <thead>
                 <tr>
-                  <th>Item</th>
+                  <th width="200">Item</th>
                   <th></th>
                   <th width="100" className='text-center'>Unit</th>
-                  <th width="100"></th>
+                  <th width="100">Unit Price</th>
                 </tr>
               </thead>
               <tbody>
@@ -80,7 +80,7 @@ const CheckoutPage = ({ order }) => {
                 <tr key={index} className="col-12">
                   <td className="col-md-2">
                     <img
-                      className='img-fluid w-100 img-thumbnail'
+                      className='img-fluid'
                       src={item.imageUrl || '/assets/no_image.png'}
                       alt={`item: ${item.name}`}
                     />
@@ -112,10 +112,12 @@ const CheckoutPage = ({ order }) => {
             </table>
           </div>
         </div>
-        <div className="col-12">
+      </div>
+      <div className="row">
+        <div className="col-12 mt-3">
           <div className="d-flex">
-            <a href="/cart" className="btn btn-outline-dark ms-auto me-3">Back</a>
-            <button onClick={onAddOrder} type="button" className="btn btn-dark">Confirm</button>
+            <a href="/cart" className="btn btn-outline-primary ms-auto me-3">Back</a>
+            <button onClick={onAddOrder} type="button" className="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>

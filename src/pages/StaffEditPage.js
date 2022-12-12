@@ -81,137 +81,98 @@ const StaffEditPage = () => {
 
   return (
     <div className='container'>
-      <div className='row'>
-        <div className='col12' align='center'>
-          <div className='signup-container'>
-            <h1>Edit Staff</h1>
-            <form noValidate className='signup-form' onSubmit={onEdit}>
-              <div className='form-group'>
-                <label>First Name:</label>
-                <input
-                  className='form-control'
-                  type='text'
-                  name='firstname'
-                  id='firstname'
-                  defaultValue={firstname}
-                  onChange={onChangeFirstname}
-                  placeholder='First Name'
-                  required
-                />
+      <h2 className='text-center mt-5'>Edit Staff</h2>
+      <form noValidate className='signup-form' onSubmit={onEdit}>
+      <div className='form-group text-end pb-3'>
+        <a href="/staffs" className='btn btn-outline-primary me-2'>Cancel</a>
+        <input
+          className='btn btn-primary'
+          type='submit'
+          value='Update'
+        />
+      </div>
+      <div className='card'>
+        <div className='card-body' onChange={onChangeRole}>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">First Name</label>
+            <div className="col-sm-10">
+              <input
+                className='form-control'
+                type='text'
+                name='firstname'
+                id='firstname'
+                value={firstname}
+                onChange={onChangeFirstname}
+                required
+              />
+            </div>
+          </div>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">Last Name</label>
+            <div className="col-sm-10">
+              <input
+                className='form-control'
+                type='text'
+                name='lastname'
+                id='lastname'
+                value={lastname}
+                onChange={onChangeLastname}
+                required
+              />
+            </div>
+          </div>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">Username</label>
+            <div className="col-sm-10">
+              <input
+                type='text'
+                className='form-control'
+                id='username'
+                name='username'
+                required
+                value={username}
+                onChange={onChangeUsername}
+              />
+            </div>
+          </div>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">Password</label>
+            <div className="col-sm-10">
+              <input
+                type='password'
+                className='form-control'
+                id='password'
+                name='password'
+                required
+                value={password}
+                onChange={onChangePassword}
+              />
+            </div>
+          </div>
+          <div className="mb-3 row">
+            <label className="col-sm-2 col-form-label">Staff Type</label>
+            <div className="col-sm-10">
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="role" id="server" value="SERVER" checked={role == 'SERVER'} onChange={SetRole}/>
+                <label className="form-check-label" htmlFor="server">Server</label>
               </div>
-              <div className='form-group'>
-                <label>Last Name:</label>
-                <input
-                  className='form-control'
-                  type='text'
-                  name='lastname'
-                  id='lastname'
-                  defaultValue={lastname}
-                  onChange={onChangeLastname}
-                  placeholder='Last Name'
-                  required
-                />
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="role" id="chef" value="CHEF" checked={role == 'CHEF'} onChange={SetRole}/>
+                <label className="form-check-label" htmlFor="chef">Chef</label>
               </div>
-              <div className='form-group'>
-                <label>Username:</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  id='username'
-                  name='username'
-                  required
-                  defaultValue={username}
-                  onChange={onChangeUsername}
-                  placeholder='Username'
-                />
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="role" id="manager" value="MANAGER" checked={role == 'MANAGER'} onChange={SetRole}/>
+                <label className="form-check-label" htmlFor="manager">Manager</label>
               </div>
-              <div className='form-group'>
-                <label>Password:</label>
-                <input
-                  type='password'
-                  className='form-control'
-                  id='password'
-                  name='password'
-                  required
-                  defaultValue={password}
-                  onChange={onChangePassword}
-                  placeholder='Password'
-                />
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="role" id="owner" value="OWNER" checked={role == 'OWNER'} onChange={SetRole}/>
+                <label className="form-check-label" htmlFor="owner">Owner</label>
               </div>
-
-              {/*MAYBE IN HERE NEED TO INCLUDE RADIO BUTTONS FOR WHAT TYPE OF USER??*/}
-
-              <div className='form-group' onChange={onChangeRole}>
-                <label>What type of user are you?</label>
-                <br />
-                <input
-                  type='radio'
-                  className='radio'
-                  name='role'
-                  value='SERVER'
-                  checked={role == 'SERVER'}
-                  onChange={SetRole}
-                />
-                <label>Server</label>
-                <input
-                  type='radio'
-                  className='radio'
-                  name='role'
-                  value='CHEF'
-                  checked={role == 'CHEF'}
-                  onChange={SetRole}
-                />
-                <label>Chef</label>
-                <input
-                  type='radio'
-                  className='radio'
-                  name='role'
-                  value='CS'
-                  checked={role == 'CS'}
-                  onChange={SetRole}
-                />
-                <label>CS</label>
-                <input
-                  type='radio'
-                  className='radio'
-                  name='role'
-                  value='TECH_SUPPORT'
-                  checked={role == 'TECH_SUPPORT'}
-                  onChange={SetRole}
-                />
-                <label>Tech Support</label>
-                <input
-                  type='radio'
-                  className='radio'
-                  name='role'
-                  value='MANAGER'
-                  checked={role == 'MANAGER'}
-                  onChange={SetRole}
-                />
-                <label>Manager</label>
-                <input
-                  type='radio'
-                  className='radio'
-                  name='role'
-                  value='OWNER'
-                  checked={role == 'OWNER'}
-                  onChange={SetRole}
-                />
-                <label>Owner</label>
-              </div>
-              <br />
-
-              <div>
-                <input
-                  className='btn btn-primary'
-                  type='submit'
-                  value='Update'
-                />
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
+      </form>
     </div>
   );
 };

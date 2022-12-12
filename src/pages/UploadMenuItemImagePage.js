@@ -51,6 +51,7 @@ const UploadMenuItemImagePage = () => {
     // console.log('imageData', image);
     await dispatch(uploadMenuItemImage({ id: menuItem._id, image: imageData }));
     //can do something after the image is uploaded
+    navigate('/menu-items');
   };
 
   if (isLoading) {
@@ -60,7 +61,7 @@ const UploadMenuItemImagePage = () => {
 
   return (
     <div className='container'>
-      <h1 className='text-center'>Upload Image</h1>
+      <h2 className='text-center mt-5'>Upload Image</h2>
       <div className='d-flex pb-4'>
         <a href='/menu-items' className='btn btn-outline-dark ms-auto me-3'>
           cancel
@@ -69,31 +70,47 @@ const UploadMenuItemImagePage = () => {
           Save
         </button>
       </div>
-      <form id='form-upload-image' onSubmit={onSubmitImage}>
-        <div className='mb-3 row'>
-          <label htmlFor='name' className='col-sm-2'>
-            Menu Item
-          </label>
-          <div className='col-sm-10'>{menuItem.name}</div>
+      <div className='card'>
+        <div className='card-body'>
+          <form id='form-upload-image' onSubmit={onSubmitImage}>
+            <div className='mb-3 row'>
+              <label htmlFor='name' className='col-sm-2'>
+                Menu Item
+              </label>
+              <div className='col-sm-10'>{menuItem.name}</div>
+            </div>
+            <div className='mb-3 row'>
+              <label htmlFor='name' className='col-sm-2'>
+                Cuurent Image
+              </label>
+              <div className='col-sm-6'>
+                <img
+                  src={menuItem.imageUrl || '/assets/no_image.png'}
+                  alt={menuItem.name}
+                  className='img-fluid'
+                />
+              </div>
+            </div>
+            <div className='mb-3 row'>
+              <label htmlFor='name' className='col-sm-2 col-form-label'>
+                Image
+              </label>
+              <div className='col-sm-6'>
+                {image && (
+                  <img src={image} alt='menu_item' className='img-thumbnail mb-3' />
+                )}
+                <input
+                  name='image'
+                  onChange={handleFileChange}
+                  type='file'
+                  accept='image/jpeg, image/png'
+                  className='form-control'
+                />
+              </div>
+            </div>
+          </form>
         </div>
-        <div className='mb-3 row'>
-          <label htmlFor='name' className='col-sm-2 col-form-label'>
-            Image
-          </label>
-          <div className='col-sm-10'>
-            {image && (
-              <img src={image} alt='menu_item' className='img-thumbnail mb-3' />
-            )}
-            <input
-              name='image'
-              onChange={handleFileChange}
-              type='file'
-              accept='image/jpeg, image/png'
-              className='form-control'
-            />
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };

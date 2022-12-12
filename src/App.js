@@ -14,8 +14,6 @@ import MenuItemListPage from './pages/MenuItemListPage';
 import AddMenuItemPage from './pages/AddMenuItemPage';
 import EditMenuItemPage from './pages/EditMenuItemPage';
 import UploadMenuItemImagePage from './pages/UploadMenuItemImagePage';
-import OrderHistoryPage from './pages/OrderHistoryPage';
-import OrderHistoryDetailPage from './pages/OrderHistoryDetailPage';
 import LiveOrderPage from './pages/LiveOrderPage';
 import CustomerOrderDetailPage from './pages/CustomerOrderDetailPage';
 import StaffsListPage from './pages/StaffsListPage';
@@ -43,13 +41,7 @@ function App() {
             <Route path='signout' element={<SignOutPage />} />
             <Route path='manageOrder' element={<ManageOrderPage />} />
             <Route path='viewOrder/:id' element={<ViewOrderPage />} />
-            <Route path='order-history' element={<OrderHistoryPage />} />
-            <Route
-              path='order-history/:id'
-              element={<OrderHistoryDetailPage />}
-            />
             <Route path='LiveOrder' element={<LiveOrderPage />} />
-
 
             {/* ONLY OWNERS AND MANAGERS CAN VIEW */}
             <Route path='menu-items' element={<MenuItemListPage />} />
