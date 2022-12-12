@@ -177,7 +177,7 @@ const EditMenuItemPage = () => {
                 />
               </div>
             </div> */}
-            {/* <div className='mb-3 row'>
+            <div className='mb-3 row'>
               <label className='col-sm-2 col-form-label'>Status</label>
               <div className='col-sm-10'>
                 <div className='form-check form-switch'>
@@ -191,7 +191,7 @@ const EditMenuItemPage = () => {
                   />
                 </div>
               </div>
-            </div> */}
+            </div>
             <div className='mb-3 row'>
               <label className='col-sm-2 col-form-label'>Order Type</label>
               <div className='col-sm-4'>

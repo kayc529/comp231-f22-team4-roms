@@ -110,6 +110,8 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
+              </div>
+            ))}
                 <hr/>
                 {/* <div className='row p-3'>
                   <div className='col d-grid gap-2'>
@@ -133,8 +135,6 @@ const Cart = () => {
                     .toFixed(2)}
                   </div>
                 </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

@@ -129,7 +129,7 @@ const AddMenuItemPage = () => {
                   className='form-control'
                 />
               </div>
-            </div>
+            </div> */}
             <div className='mb-3 row'>
               <label className='col-sm-2 col-form-label'>Status</label>
               <div className='col-sm-10'>
@@ -144,7 +144,7 @@ const AddMenuItemPage = () => {
                   />
                 </div>
               </div>
-            </div> */}
+            </div>
             <div className='mb-3 row'>
               <label className='col-sm-2 col-form-label'>Order Type</label>
               <div className='col-sm-4'>

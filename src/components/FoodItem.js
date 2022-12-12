@@ -13,7 +13,7 @@ const FoodItem = ({ prop }) => {
 
 
     return (
-      <div className="col-sm-3 mb-4">
+      <div className="col-sm-6 col-md-4 col-lg-3 mb-4">
         <div className="food-item card">
           <div className="card-body">
             <div className='image mb-3'>
