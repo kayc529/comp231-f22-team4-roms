@@ -72,24 +72,22 @@ const Cart = () => {
   }
 
   return (
-    <Stack gap={3}>
-      <section className='cartPage'>
-        <div id='cartList' className='container-fluid'>
-          <div className='row bg-light p-3'>
-            <div className='col display-5 fw-bold'>My Cart</div>
-          </div>
-          <div className='row p-3'>
+    <div className="container cartPage">
+      <h2 className='mt-5'>My Order</h2>
+      <div className="card">
+        <div className="card-body">
+          <div id="cartList">
             {cart.map((item, index) => (
               <div key={index} className='cartItem'>
                 <div className='itemDetails row align-items-center'>
-                  <div className='col-2 '>
+                  <div className='col-2'>
                     <img
-                      className='img-fluid w-100 img-thumbnail'
+                      className='img-fluid'
                       src={item.imageUrl || '/assets/no_image.png'}
                       alt={`item: ${item.name}`}
                     />
                   </div>
-                  <div className='col-2'>
+                  <div className='col'>
                     <Link to={`/food-item/${item._id}`}>{item.name}</Link>
                   </div>
                   <div className='col-2'>${item.price.toFixed(2)}</div>
@@ -102,7 +100,7 @@ const Cart = () => {
                       onChange={(e) => changeQuantity(e, item)}
                     />
                   </div>
-                  <div className='col-3'>
+                  <div className='col-2 text-end'>
                     <button
                       type='button'
                       className='btn btn-danger btn-sm'
@@ -112,41 +110,45 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
+                <hr/>
+                {/* <div className='row p-3'>
+                  <div className='col d-grid gap-2'>
+                    <button
+                      className='btn btn-success btn-lg btn-block'
+                      onClick={handleMenu}
+                    >
+                      Add More Items
+                    </button>
+                  </div>
+                </div> */}
+                <div className='row'>
+                  <div className='col-12 text-end'>
+                  Total: $
+                  {cart
+                    .reduce(
+                      (accumulator, cartItem) =>
+                        accumulator + cartItem.count * cartItem.price,
+                      0
+                    )
+                    .toFixed(2)}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
-          <div className='row p-3'>
-            <div className='col fw-bold'>
-              Total: $
-              {cart
-                .reduce(
-                  (accumulator, cartItem) =>
-                    accumulator + cartItem.count * cartItem.price,
-                  0
-                )
-                .toFixed(2)}
-            </div>
-          </div>
-          <div className='row p-3'>
-            <div className='col d-grid gap-2'>
-              <button
-                className='btn btn-success btn-lg btn-block'
-                onClick={handleMenu}
-              >
-                Add More Items
-              </button>
-            </div>
-          </div>
         </div>
-        <div id='cartTime' className='container-fluid'>
-          <div className='row bg-light p-3'>
-            <div className='col display-5 fw-bold'>{toggleOrderType()}</div>
+      </div>
+
+      <div className="card mt-5" id='cartTime'>
+        <div className='card-body'>
+          <h2>Order Detail</h2>
+          <div className='mb-3 row'>
+            <div className='col-sm-2 '>Order type</div>
+            <div className='col-sm-10'>{toggleOrderType()}</div>
           </div>
-          <div className='row p-3'>
-            <div className='col'>Select time</div>
-          </div>
-          <div className='row p-3'>
-            <div className='col'>
+          <div className='mb-3 row'>
+            <div className='col-sm-2 '>Select time</div>
+            <div className='col-sm-10'>
               <DatePicker
                 className='form-control'
                 selected={now}
@@ -161,33 +163,33 @@ const Cart = () => {
               />
             </div>
           </div>
-        </div>
-        <div id='cartAction' className='container-fluid'>
-          <div className='row p-3'>
-            <div className='col d-grid gap-2'>
-              <button
-                className='btn btn-success btn-lg btn-block'
-                onClick={handleCheckout}
-              >
-                Proceed to Check out
-              </button>
-              <button
-                className='btn btn-primary btn-lg btn-block'
-                onClick={handlePrevious}
-              >
-                Back to Previous page
-              </button>
-              <button
-                className='btn btn-dark btn-lg btn-block'
-                onClick={handleHome}
-              >
-                Back to Home
-              </button>
+          <div id='cartAction'>
+            <div className='row'>
+              <div className='col d-grid gap-3'>
+                <button
+                  className='btn btn-success btn-lg btn-block'
+                  onClick={handleCheckout}
+                >
+                  Proceed to Check out
+                </button>
+                <button
+                  className='btn btn-primary btn-lg btn-block'
+                  onClick={handlePrevious}
+                >
+                  Back to Previous page
+                </button>
+                <button
+                  className='btn btn-dark btn-lg btn-block'
+                  onClick={handleHome}
+                >
+                  Back to Home
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-    </Stack>
+      </div>
+    </div>
   );
 };
 
